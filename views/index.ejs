@@ -1,38 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<%- include('partials/header') -%>
 
-        <title>Employee Database System</title>
+    <div class="container mt-5">
 
-        <link rel="stylesheet" href="./stylesheets/design.css">
-        <link rel="stylesheet" href="./stylesheets/bootstrap.css">
-        <link rel="stylesheet" href="./stylesheets/dataTables.bootstrap4.min.css">
+        <div id="table1">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 
-        <script src="./js/jquery.min.js"></script>
-        <script src="./js/jquery.dataTables.min.js"></script>
-        <script src="./js/dataTables.bootstrap4.min.js"></script>
-    </head>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Designation</th>
+                        <th>Salary</th>
+                        <th>Operations</th>
+                    </tr>
+                </thead>
 
-    <body> 
-       <nav class="py-1 navbar navbar-expand-lg navbar-light bg-danger">
-        <a href="/" class="navbar-brand text-white ml-4"><b>Employee Database System</b>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-       </nav>
+                <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Designation</th>
+                        <th>Salary</th>
+                        <th>Operations</th>
+                    </tr>
+                </tfoot>
 
-       <div class="collape navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <tbody>
 
-        <div class="mr-5">
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="" class="btn btn-primary">Edit</a>
+                            <form style="display: inline;" action="/delete" method="POST">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button style="cursor:pointer" type="submit" class="btn btn-danger ml-2">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    
+                </tbody>
 
+            </table>
         </div>
-        
-       </div>
-        
-    </body>
-    
-</html>
+    </div>
+
+<%- include('partials/footer') -%>
