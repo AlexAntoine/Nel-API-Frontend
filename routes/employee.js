@@ -1,8 +1,10 @@
 const express = require('express');
 
 const router = express.Router();
-const {homePage} = require('../controller/employees');
+const {homePage, newEmployee,createEmployee} = require('../controller/employees');
 
-router.get('/', homePage);
+router.route('/').get(homePage);
+router.route('/new').get(newEmployee).post(createEmployee);
+
 
 module.exports = router; 
