@@ -1,0 +1,15 @@
+<%- include('partials/header') -%>
+    <div class="container mt-5 w-50">
+
+        <h2 class="mb-4">Update Employee Data</h2>
+
+        <form action="" method="POST">
+            <input type="text" name="_method" value="PUT">
+            <input type="text" name="name" class="form-control" placeholder="Employee Designation">
+            <input type="text" class="form-control" placeholder="Employee Salary" name="salary">
+
+            <button class="btn btn-danger btn-block mt-3">Update Employee</button>
+        </form>
+    </div>
+
+<%- include('partials/footer') -%>
