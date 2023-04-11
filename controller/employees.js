@@ -23,3 +23,22 @@ exports.createEmployee = async(req, res)=>{
     res.redirect('/');
     // console.log(data);
 }
+
+exports.searchEmployee = async(req, res)=>{
+
+    res.render('search',{employee:""})
+}
+
+exports.findOneEmployee = async(req, res)=>{
+
+    const {name} = req.query;
+    // console.log(searchQuery);
+    try{
+        const employee = await Employee.findOne({name});
+
+        res.render('search',{employee:employee});
+    }catch(e){
+        console.log(e);
+    }
+
+}
