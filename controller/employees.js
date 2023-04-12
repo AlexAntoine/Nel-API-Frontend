@@ -42,3 +42,34 @@ exports.findOneEmployee = async(req, res)=>{
     }
 
 }
+
+exports.editEmployee = async(req, res)=>{
+    const {id} = req.params;
+    try {
+        const employee = await Employee.findOne({_id:id});
+
+        res.render('edit',{employee});
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+exports.getEditPage = async(req, res)=>{
+   res.render('edit',{employee:""})
+}
+
+exports.updateEmployee = async(req, res)=>{
+    const {id} = req.params;
+    const data = req.body
+
+    console.log(data);
+    const employee = await Employee.updateOne({_id:id}, {$set:{
+        name:req.body.name,
+
+    }});
+    console.log(employee);
+
+    res.redirect('/');
+
+}
