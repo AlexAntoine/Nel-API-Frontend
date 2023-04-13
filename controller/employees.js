@@ -72,3 +72,11 @@ exports.updateEmployee = async(req, res)=>{
 
     res.redirect('/');
 }
+
+exports.deleteEmployee = async(req, res)=>{
+    const {id} =req.params;
+    
+    await Employee.findByIdAndDelete(id);
+
+    res.redirect('/');
+}
