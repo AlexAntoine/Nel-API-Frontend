@@ -1,6 +1,8 @@
 require('dotenv').config({path:'./.env'});
 const express = require('express');
 const colors = require('colors');
+const session = require('express-session');
+const flash = require('connect-flash');
 const methodOverride = require('method-override');
 const { urlencoded } = require('body-parser');
 const {localDb} = require('./db/employeeDb');
@@ -17,7 +19,18 @@ app.use(express.static(path.join(__dirname,'public')));
 //Routes
 const employeeRouter = require('./routes/employee');
 
+app.use(session({secret:'abcd', resave:true, saveUninitialized:true}));
+app.use(flash())
 app.use(methodOverride('_method'));
+
+
+app.use((req, res,next)=>{
+    res.locals.success_msg = req.flash(('success_msg'));
+    res.locals.error_msg  = req.flash(('error_msg'));
+
+    next();
+});
+
 app.use(employeeRouter);
 
 localDb();
