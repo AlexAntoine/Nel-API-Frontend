@@ -1,8 +1,14 @@
 const Employee = require('../models/employees');
 
 exports.homePage = async(req, res)=>{
-   const employees = await Employee.find();
-    res.render('index',{employees});
+    try {
+        const employees = await Employee.find();
+
+        res.render('index',{employees});
+
+    } catch (error) {
+        console.log(error);
+    }
 } 
 
 exports.newEmployee = (req, res)=>{
@@ -10,18 +16,24 @@ exports.newEmployee = (req, res)=>{
 }
 
 exports.createEmployee = async(req, res)=>{
+
     const {name, designation, salary}= req.body;
-    // console.log(req.body)
-    const newEmployee = new Employee({
-        name,
-        designation,
-        salary
-    });
 
-    const data = await newEmployee.save();
+    try {
+        const newEmployee = new Employee({
+            name,
+            designation,
+            salary
+        });
 
-    res.redirect('/');
-    // console.log(data);
+        await newEmployee.save();
+
+        res.redirect('/');
+    } catch (error) {
+
+        console.log(error);
+    }
+
 }
 
 exports.searchEmployee = async(req, res)=>{
@@ -32,7 +44,7 @@ exports.searchEmployee = async(req, res)=>{
 exports.findOneEmployee = async(req, res)=>{
 
     const {name} = req.query;
-    // console.log(searchQuery);
+    
     try{
         const employee = await Employee.findOne({name});
 
@@ -45,6 +57,7 @@ exports.findOneEmployee = async(req, res)=>{
 
 exports.editEmployee = async(req, res)=>{
     const {id} = req.params;
+
     try {
         const employee = await Employee.findOne({_id:id});
 
@@ -63,20 +76,33 @@ exports.updateEmployee = async(req, res)=>{
     const {id} = req.params;
     const {name, designation, salary}= req.body
 
-    await Employee.updateOne({_id:id}, {$set:{
-        name,
-        designation,
-        salary
+    try {
+        await Employee.updateOne({_id:id}, {$set:{
+            name,
+            designation,
+            salary
+    
+        }});
 
-    }});
+        res.redirect('/');
+    } catch (error) {
 
-    res.redirect('/');
+        console.log(error);
+    }
+  
 }
 
 exports.deleteEmployee = async(req, res)=>{
     const {id} =req.params;
-    
-    await Employee.findByIdAndDelete(id);
 
-    res.redirect('/');
+    try {
+        await Employee.findByIdAndDelete(id);
+
+        req.flash('success_msg',"Employee deleted succesfully")
+      
+        res.redirect('/');
+    } catch (error) {
+        req.flash('error_msg',`ERROR ${error}`);
+        console.log(error);
+    }
 }
