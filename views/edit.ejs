@@ -4,8 +4,8 @@
     <h2 class="mb-4">Update Employee Data</h2>
         <form action="/edit/<%= employee.id%>?_method=PUT" method="POST">
             <input type="hidden" name="_method" value="PUT">
-            <input type="text" class="form-control" value="<%= employee.name%>" name="_method" placeholder="Employee Name">
-            <input type="text" value="<%= employee.designation%>" name="name" class="form-control" placeholder="Employee Designation">
+            <input type="text" class="form-control" value="<%= employee.name%>" name="name" placeholder="Employee Name">
+            <input type="text" value="<%= employee.designation%>" name="designation" class="form-control" placeholder="Employee Designation">
             <input type="text" value="<%= employee.salary%>" class="form-control" placeholder="Employee Salary" name="salary">
 
             <button class="btn btn-danger btn-block mt-3">Update Employee</button>

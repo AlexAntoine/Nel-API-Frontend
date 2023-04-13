@@ -61,15 +61,14 @@ exports.getEditPage = async(req, res)=>{
 
 exports.updateEmployee = async(req, res)=>{
     const {id} = req.params;
-    const data = req.body
+    const {name, designation, salary}= req.body
 
-    console.log(data);
-    const employee = await Employee.updateOne({_id:id}, {$set:{
-        name:req.body.name,
+    await Employee.updateOne({_id:id}, {$set:{
+        name,
+        designation,
+        salary
 
     }});
-    console.log(employee);
 
     res.redirect('/');
-
 }
