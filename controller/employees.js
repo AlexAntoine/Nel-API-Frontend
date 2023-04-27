@@ -11,9 +11,7 @@ exports.homePage = async(req, res)=>{
     //     console.log(error);
     // }
 
-    const results = await axios.get('https://nel-api.herokuapp.com/api/old');
-    // console.log(results.data);
-    res.render('index',{data:results})
+   
 } 
 
 exports.newEmployee = (req, res)=>{
@@ -110,4 +108,13 @@ exports.deleteEmployee = async(req, res)=>{
         req.flash('error_msg',`ERROR ${error}`);
         console.log(error);
     }
+}
+
+exports.getTestPage= async(req, res)=>{
+
+    console.log('Hello');
+
+    const {data} = await axios.get('https://nel-api.herokuapp.com/api/old');
+    console.log(data.data);
+    res.render('test',{devices:data.data})
 }

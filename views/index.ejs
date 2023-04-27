@@ -24,21 +24,20 @@
                 </tfoot>
 
                 <tbody>
-                    <% data.forEach((d)=>{ %>
+                  
                         <tr>
-                            <td><%= d.ComputerName %></td>
-                            <td><%= d.ModelNumber%></td>
-                            <td>$<%= d.Manufacturer %></td>
+                            <td>computer name</td>
+                            <td>model number</td>
+                            <td>manufactuer</td>
                             <td>
-                                <a href="edit/<%= employee.id%>" class="btn btn-primary">Edit</a>
-                                <form style="display: inline;" action="/delete/<%= employee.id%>?_method=DELETE" method="POST">
+                                <a href="edit/" class="btn btn-primary">Edit</a>
+                                <form style="display: inline;" action="/delete" method="POST">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <button style="cursor:pointer" type="submit" class="btn btn-danger ml-2">Delete</button>
                                 </form>
                             </td>
                         </tr>
-                    <% }) %>
-                    
+                 
                 </tbody>
 
             </table>
