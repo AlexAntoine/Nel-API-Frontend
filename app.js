@@ -18,6 +18,7 @@ app.use(express.static(path.join(__dirname,'public')));
 
 //Routes
 const employeeRouter = require('./routes/employee');
+const userRoute = require('./routes/users');
 
 app.use(session({secret:'abcd', resave:true, saveUninitialized:true}));
 app.use(flash())
@@ -32,6 +33,7 @@ app.use((req, res,next)=>{
 });
 
 app.use(employeeRouter);
+app.use(userRoute);
 
 localDb();
 
