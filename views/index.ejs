@@ -24,11 +24,11 @@
                 </tfoot>
 
                 <tbody>
-                    <% employees.forEach((employee)=>{ %>
+                    <% data.forEach((d)=>{ %>
                         <tr>
-                            <td><%= employee.name %></td>
-                            <td><%= employee.designation%></td>
-                            <td>$<%= employee.salary %></td>
+                            <td><%= d.ComputerName %></td>
+                            <td><%= d.ModelNumber%></td>
+                            <td>$<%= d.Manufacturer %></td>
                             <td>
                                 <a href="edit/<%= employee.id%>" class="btn btn-primary">Edit</a>
                                 <form style="display: inline;" action="/delete/<%= employee.id%>?_method=DELETE" method="POST">

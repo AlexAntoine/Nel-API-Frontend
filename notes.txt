@@ -1,10 +1,1 @@
-Ran into MIME type issue where the broswer couldn't find the CSS files when I navigated to another page
-The issue was the file. An issue like that will most likely be the file path. In this case I had a lot of things
-correct but my href were written like this href="./stylesheets/bootstrap.css" instead of this href="/stylesheets/bootstrap.css"
-This YouTube channel helped me figure it out. Idk what he is saying the I understand the code.
-
-https://www.youtube.com/watch?v=3gtOtxkm7Gg&ab_channel=GeekyShows
-
-PUT functionality is not working as expected. - Fixed
-
-Finish adding error message and success message
+Re purposing this app for NEL API front end

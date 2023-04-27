@@ -1,14 +1,19 @@
+const axios = require('axios');
 const Employee = require('../models/employees');
 
 exports.homePage = async(req, res)=>{
-    try {
-        const employees = await Employee.find();
+    // try {
+    //     const employees = await Employee.find();
 
-        res.render('index',{employees});
+    //     res.render('index',{employees});
 
-    } catch (error) {
-        console.log(error);
-    }
+    // } catch (error) {
+    //     console.log(error);
+    // }
+
+    const results = await axios.get('https://nel-api.herokuapp.com/api/old');
+    // console.log(results.data);
+    res.render('index',{data:results})
 } 
 
 exports.newEmployee = (req, res)=>{
