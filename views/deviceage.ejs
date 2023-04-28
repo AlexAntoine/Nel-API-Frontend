@@ -1,0 +1,48 @@
+<%- include('partials/header') -%>
+
+    <div class="container mt-5">
+        <%- include('partials/messages') -%>
+        <div id="table1">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                <thead>
+                    <tr>
+                        <th>Device Name</th>
+                        <th>Ship Date</th>
+                        <th>Operations</th>
+                    </tr>
+                </thead>
+
+                <tfoot>
+                    <tr>
+                        <th>Device Name</th>
+                        <th>Ship Date</th>
+                        <th>Operations</th>
+                    </tr>
+                </tfoot>
+
+                <tbody>
+                                          
+                
+                    <% devices.forEach((device)=>{ %>
+
+                    <tr>
+                        <td><%= device.DeviceName%></td>
+                        <td><%= device.ShipDate%></td>
+                        <td>
+                            <a href="edit/" class="btn btn-primary">Edit</a>
+                            <form style="display: inline;" action="/delete" method="POST">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button style="cursor:pointer" type="submit" class="btn btn-danger ml-2">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+
+                    <%})%>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+<%- include('partials/footer') -%>

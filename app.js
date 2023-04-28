@@ -19,6 +19,7 @@ app.use(express.static(path.join(__dirname,'public')));
 //Routes
 const employeeRouter = require('./routes/employee');
 const userRoute = require('./routes/users');
+const deviceAge= require('./routes/deviceAge');
 
 app.use(session({secret:'abcd', resave:true, saveUninitialized:true}));
 app.use(flash())
@@ -34,6 +35,7 @@ app.use((req, res,next)=>{
 
 app.use(employeeRouter);
 app.use(userRoute);
+app.use(deviceAge);
 
 localDb();
 
