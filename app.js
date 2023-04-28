@@ -5,7 +5,6 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const methodOverride = require('method-override');
 const { urlencoded } = require('body-parser');
-const {localDb} = require('./db/employeeDb');
 const path = require('path');
 
 const app = express();
@@ -38,8 +37,6 @@ app.use(employeeRouter);
 app.use(userRoute);
 app.use(deviceAge);
 app.use(currentdevice)
-
-localDb();
 
 
 module.exports = app;
