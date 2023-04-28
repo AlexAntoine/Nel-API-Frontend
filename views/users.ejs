@@ -9,8 +9,8 @@
                     <tr>
                         <th>Name</th>
                         <th>Title</th>
-                        <th>Username</th>
                         <th>Email</th>
+                        <th>Username</th>
                         <th>Operations</th>
                     </tr>
                 </thead>
@@ -18,9 +18,9 @@
                 <tfoot>
                     <tr>
                         <th>Name</th>
-                        <th>Title</th>
-                        <th>Username</th>
+                        <!-- <th>Title</th> -->
                         <th>Email</th>
+                        <th>Username</th>
                         <th>Operations</th>
                     </tr>
                 </tfoot>
@@ -31,9 +31,13 @@
 
                     <tr>
                         <td><%= user.DisplayName%></td>
-                        <td><%= user.Title%></td>
-                        <td><%= user.SamAccountName%></td>
+                        <!-- <td><%= user.Title%></td> -->
+                        <td><%= user.DisplayName%></td>
+                        
                         <td><%= user.UserPrincipalName%></td>
+                        <td><%= user.SamAccountName%></td>
+                        
+                        
                         <td>
                             <a href="edit/" class="btn btn-primary">Edit</a>
                             <form style="display: inline;" action="/delete" method="POST">
