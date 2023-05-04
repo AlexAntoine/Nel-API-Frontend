@@ -71,10 +71,6 @@ exports.editEmployee = async(req, res)=>{
     }
 }
 
-exports.getEditPage = async(req, res)=>{
-   res.render('edit',{employee:""})
-}
-
 exports.updateEmployee = async(req, res)=>{
     const {id} = req.params;
     const {name, designation, salary}= req.body
