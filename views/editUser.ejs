@@ -1,0 +1,17 @@
+<%- include('partials/users') -%>
+<div class="container mt-5 w-50">
+
+    <h2 class="mb-4">Update Users Data</h2>
+        <form action="/edit/<%= users.id%>?_method=PUT" method="POST">
+            <input type="hidden" name="_method" value="PUT">
+            <input type="text" class="form-control" value="" name="name" placeholder="Users Name">
+            <input type="text" value="<%= users.UserPrincipalName%>" name="email" class="form-control" placeholder="<%= users.UserPrincipalName%> ">
+            <input type="text" value="" class="form-control" placeholder="Username" name="salary">
+            <input type="text" value="" class="form-control" placeholder="Office" name="office">
+            <input type="text" value="" class="form-control" placeholder="Title" name="title">
+
+            <button class="btn btn-danger btn-block mt-3">Update User</button>
+        </form>
+    
+</div>
+<%- include('partials/footer') -%>
