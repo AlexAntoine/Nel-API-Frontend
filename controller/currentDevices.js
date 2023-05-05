@@ -3,6 +3,13 @@ const axios = require('axios');
 exports.getCurrentDevicePage = async(req, res)=>{
 
     const devices = await axios.get('https://nel-api.herokuapp.com/api/current');
-    // console.log(devices.data.data);
+   
     res.render('currentdevices', {devices: devices.data.data})
+}
+
+exports.getCurrentDeviceEditPage = async (req, res)=>{
+   
+    const {data} = await axios.get(`https://nel-api.herokuapp.com/api/current/${req.params.id}`);
+    
+    res.render('editCurrentDevice',{devices:data.device});
 }
