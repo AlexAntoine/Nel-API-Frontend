@@ -6,14 +6,15 @@ exports.getNewUserPage = async(req, res)=>{
 }
 
 exports.getUserEditPage = async(req, res)=>{
-    console.log(req.params);
-
-    res.render('editUser', {users:''})
+    
+    const {data} = await axios.get(`https://nel-api.herokuapp.com/api/nelusers/${req.params.id}`);
+    
+    res.render('editUser', {user:data.data})
 }
 
 exports.getUsersPage = async(req, res)=>{
     
     const {data} = await axios.get('https://nel-api.herokuapp.com/api/nelusers');
-    console.log(data.data);
+   
     res.render('users', {users:data.data});
 }

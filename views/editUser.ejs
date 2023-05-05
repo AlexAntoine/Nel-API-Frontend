@@ -2,13 +2,13 @@
 <div class="container mt-5 w-50">
 
     <h2 class="mb-4">Update Users Data</h2>
-        <form action="/edit/<%= users.id%>?_method=PUT" method="POST">
+        <form action="/edit/<%= user.id%>?_method=PUT" method="POST">
             <input type="hidden" name="_method" value="PUT">
-            <input type="text" class="form-control" value="" name="name" placeholder="Users Name">
-            <input type="text" value="<%= users.UserPrincipalName%>" name="email" class="form-control" placeholder="<%= users.UserPrincipalName%> ">
-            <input type="text" value="" class="form-control" placeholder="Username" name="salary">
-            <input type="text" value="" class="form-control" placeholder="Office" name="office">
-            <input type="text" value="" class="form-control" placeholder="Title" name="title">
+            <input type="text" class="form-control" value="<%= user.CN%>" name="name" placeholder="Name">
+            <input type="text" class="form-control" value="<%= user.UserPrincipalName%>" name="email" placeholder="Email">
+            <input type="text" class="form-control" value="<%=user.SamAccountName%>" name="username" placeholder="Username">
+            <input type="text" class="form-control" value="<%= user.Title%>" name="title" placeholder="Title">
+            <input type="text" class="form-control" value="<%= user.Office%>" name="office" placeholder="Office">
 
             <button class="btn btn-danger btn-block mt-3">Update User</button>
         </form>
