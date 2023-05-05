@@ -1,4 +1,4 @@
-<%- include('partials/header') -%>
+<%- include('partials/currentDevice') -%>
 
     <div class="container mt-5">
         <%- include('partials/messages') -%>
@@ -40,7 +40,7 @@
                         <td><%= device.SerialNumber%></td>
                         
                         <td>
-                            <a href="edit/" class="btn btn-primary">Edit</a>
+                            <a href="edit/current/<%=device._id%>" class="btn btn-primary">Edit</a>
                             <form style="display: inline;" action="/delete" method="POST">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <button style="cursor:pointer" type="submit" class="btn btn-danger ml-2">Delete</button>
