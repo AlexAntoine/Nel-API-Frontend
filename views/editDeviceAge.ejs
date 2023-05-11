@@ -2,7 +2,7 @@
 <div class="container mt-5 w-50">
 
     <h2 class="mb-4">Update Device Data</h2>
-        <form action="/edit/<%= devices.id%>?_method=PUT" method="POST">
+        <form action="/edit/deviceage/<%= devices._id%>?_method=PUT" method="POST">
             <input type="hidden" name="_method" value="PUT">
             <input type="text" class="form-control" value="<%= devices.DeviceName%>" name="devicename" placeholder="Device Name">
             <input type="text" class="form-control" value="<%= devices.ShipDate%>" name="shipdate" placeholder="Ship Date">
