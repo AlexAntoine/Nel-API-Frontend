@@ -2,16 +2,21 @@
 
 <div class="container mt-5 w-50">
 
-    <h2 class="mb-4">Add Old Device</h2>
+    <h2 class="mb-4">Update Old Device</h2>
 
     <form action="/edit/old/<%=devices._id%>?_method=PUT" method="POST">
-        <input type="text" name="name" class="form-control" placeholder="Employee Name">
+        <input type="hidden" name="_method" value="PUT">
+            <input type="text" class="form-control" value="<%= devices.ComputerName%>" name="Computer Name" placeholder="Computer Name">
+            <input type="text" class="form-control" value="<%= devices.Manufacturer%>" name="Manufacturer" placeholder="Manufacturer">
+            <input type="text" class="form-control" value="<%= devices.SerialNumber%>" name="Serial Number" placeholder="Serial Number">
+            <input type="text" class="form-control" value="<%=devices.ModelNumber%>" name="Model Number" placeholder="Model Number">
+            <input type="text" class="form-control" value="<%=devices.Age%>" name="Age" placeholder="Age">
+            <input type="text" class="form-control" value="<%=devices.CurrentYear%>" name="Current Year" placeholder="Current Year">
+            <input type="text" class="form-control" value="<%=devices.ShipDate%>" name="Ship Date" placeholder="Ship Date">
+            <input type="text" class="form-control" value="<%=devices.assignedTo%>" name="Assigned To" placeholder="Assigned To">
+            <input type="text" class="form-control" value="<%=devices.notes%>" name="Notes" placeholder="Notes">
 
-        <input type="text" name="designation" class="form-control" placeholder="Employee Designation">
-
-        <input type="text" name="salary" class="form-control" placeholder="Employee Salary">
-
-        <button type="submit" class="btn btn-danger btn-block mt-3">Add to Database</button>
+            <button class="btn btn-danger btn-block mt-3">Update Old Device</button>
 
     </form>
 </div>
