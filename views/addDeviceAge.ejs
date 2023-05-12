@@ -1,0 +1,14 @@
+<%- include('partials/deviceage') -%>
+<div class="container mt-5 w-50">
+
+    <h2 class="mb-4">Update Device Data</h2>
+        <form action="" method="POST">
+            <input type="hidden" name="_method" value="PUT">
+            <input type="text" class="form-control" value="DeviceName" name="devicename" placeholder="Device Name">
+            <input type="text" class="form-control" value="ShipDate" name="shipdate" placeholder="Ship Date">
+            
+            <button class="btn btn-danger btn-block mt-3">Add New Device</button>
+        </form>
+    
+</div>
+<%- include('partials/footer') -%>

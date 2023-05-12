@@ -27,3 +27,7 @@ exports.updateDeviceAge = async(req, res)=>{
     
     res.redirect('/deviceage')
 }
+
+exports.addDevagePage =(req, res)=>{
+    res.render('addDeviceAge')
+}
