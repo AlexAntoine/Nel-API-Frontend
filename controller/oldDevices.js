@@ -9,7 +9,9 @@ exports.getOldDevicesPage = async(req, res)=>{
 }
 
 exports.getOldDevicesEditPage = async(req, res)=>{
+   const {id} = req.params;
     
-    res.render('editOldDevice', {devices:''})
+   const {data} =  await axios.get(`https://nel-api.herokuapp.com/api/old/${id}`);
+   res.render('editOldDevice', {devices:data.data});
     
 }
