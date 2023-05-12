@@ -15,3 +15,7 @@ exports.getOldDevicesEditPage = async(req, res)=>{
    res.render('editOldDevice', {devices:data.data});
     
 }
+
+exports.getAddPage = async(req,res)=>{
+    res.render('addOldDevice')
+}
