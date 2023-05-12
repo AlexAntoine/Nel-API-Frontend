@@ -13,3 +13,7 @@ exports.getCurrentDeviceEditPage = async (req, res)=>{
     
     res.render('editCurrentDevice',{devices:data.device});
 }
+
+exports.getAddCurrentDevicePage = async (req, res)=>{
+   res.render('addCurrentDevice')
+}
