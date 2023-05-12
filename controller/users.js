@@ -1,7 +1,6 @@
 const axios = require('axios');
 
 exports.getNewUserPage = async(req, res)=>{
-
     res.render('addUser');
 }
 
