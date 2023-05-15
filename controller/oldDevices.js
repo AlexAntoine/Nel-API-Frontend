@@ -19,3 +19,24 @@ exports.getOldDevicesEditPage = async(req, res)=>{
 exports.getAddPage = async(req,res)=>{
     res.render('addOldDevice')
 }
+
+exports.updateOldDevice = async(req, res)=>{
+    
+    const {ComputerName,Manufacturer,SerialNumber,ModelNumber,Age,CurrentYear, ShipDate, assignedTo,notes} = req.body;
+
+    const data = {
+        ComputerName: ComputerName,
+        Manufacturer: Manufacturer,
+        SerialNumber:SerialNumber,
+        ModelNumber:ModelNumber,
+        Age:Age,
+        CurrentYear:CurrentYear,
+        ShipDate:ShipDate,
+        assignTo:assignedTo,
+        notes:notes  
+    }
+
+    await axios.put(`https://nel-api.herokuapp.com/api/old/${req.params.id}`, data);
+   
+    res.redirect('/old')
+}
