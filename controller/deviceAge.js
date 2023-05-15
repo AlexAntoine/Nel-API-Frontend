@@ -23,11 +23,13 @@ exports.updateDeviceAge = async(req, res)=>{
         ShipDate:shipdate
 
     }
+   
     await axios.put(`https://nel-api.herokuapp.com/api/deviceage/${req.params.id}`, data);
     
     res.redirect('/deviceage')
 }
 
-exports.addDevagePage =(req, res)=>{
+exports.addDevicePage =(req, res)=>{
+    
     res.render('addDeviceAge')
 }

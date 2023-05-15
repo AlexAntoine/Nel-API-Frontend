@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const {getDeviceAgePage,addDevagePage, getDeviceAgeEditPage,updateDeviceAge} = require('../controller/deviceAge');
+const {getDeviceAgePage,addDevicePage, getDeviceAgeEditPage,updateDeviceAge} = require('../controller/deviceAge');
 
 router.route('/deviceage').get(getDeviceAgePage);
 router.route('/edit/deviceage/:id').get(getDeviceAgeEditPage).put(updateDeviceAge);
-router.route('/add/deviceage').get(addDevagePage);
+router.route('/add/deviceage').get(addDevicePage);
 
 module.exports = router;

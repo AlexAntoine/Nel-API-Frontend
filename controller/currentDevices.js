@@ -17,3 +17,24 @@ exports.getCurrentDeviceEditPage = async (req, res)=>{
 exports.getAddCurrentDevicePage = async (req, res)=>{
    res.render('addCurrentDevice')
 }
+
+exports.updateCurrentDevice = async (req, res)=>{
+
+   const {ComputerName,Manufacturer,SerialNumber,ModelNumber,Age,CurrentYear,ShipDate,AssignedTo,Notes} = req.body;
+
+   const data = {
+      ComputerName: ComputerName,
+      Manufacturer: Manufacturer,
+      SerialNumber:SerialNumber,
+      ModelNumber:ModelNumber,
+      Age:Age,
+      CurrentYear:CurrentYear,
+      ShipDate:ShipDate,
+      assignTo:AssignedTo,
+      notes:Notes
+   }
+
+    await axios.put(`https://nel-api.herokuapp.com/api/current/${req.params.id}`,data);
+    
+    res.redirect('/current');
+}

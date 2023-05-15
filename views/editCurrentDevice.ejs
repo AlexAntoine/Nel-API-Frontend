@@ -2,16 +2,16 @@
 <div class="container mt-5 w-50">
 
     <h2 class="mb-4">Update Current Device Data</h2>
-        <form action="/edit/<%devices.id%>?_method=PUT" method="POST">
+        <form action="/edit/current/<%=devices._id%>?_method=PUT" method="POST">
             <input type="hidden" name="_method" value="PUT">
-            <input type="text" class="form-control" value="<%= devices.ComputerName%>" name="Computer Name" placeholder="Computer Name">
+            <input type="text" class="form-control" value="<%= devices.ComputerName%>" name="ComputerName" placeholder="Computer Name">
             <input type="text" class="form-control" value="<%= devices.Manufacturer%>" name="Manufacturer" placeholder="Manufacturer">
-            <input type="text" class="form-control" value="<%= devices.SerialNumber%>" name="Serial Number" placeholder="Serial Number">
-            <input type="text" class="form-control" value="<%=devices.ModelNumber%>" name="Model Number" placeholder="Model Number">
+            <input type="text" class="form-control" value="<%= devices.SerialNumber%>" name="SerialNumber" placeholder="Serial Number">
+            <input type="text" class="form-control" value="<%=devices.ModelNumber%>" name="ModelNumber" placeholder="Model Number">
             <input type="text" class="form-control" value="<%=devices.Age%>" name="Age" placeholder="Age">
-            <input type="text" class="form-control" value="<%=devices.CurrentYear%>" name="Current Year" placeholder="Current Year">
-            <input type="text" class="form-control" value="<%=devices.ShipDate%>" name="Ship Date" placeholder="Ship Date">
-            <input type="text" class="form-control" value="<%=devices.assignedTo%>" name="Assigned To" placeholder="Assigned To">
+            <input type="text" class="form-control" value="<%=devices.CurrentYear%>" name="CurrentYear" placeholder="Current Year">
+            <input type="text" class="form-control" value="<%=devices.ShipDate%>" name="ShipDate" placeholder="Ship Date">
+            <input type="text" class="form-control" value="<%=devices.assignedTo%>" name="AssignedTo" placeholder="Assigned To">
             <input type="text" class="form-control" value="<%=devices.notes%>" name="Notes" placeholder="Notes">
             
             <button class="btn btn-danger btn-block mt-3">Update User</button>
