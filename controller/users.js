@@ -17,3 +17,21 @@ exports.getUsersPage = async(req, res)=>{
    
     res.render('users', {users:data.data});
 }
+
+exports.updateUser = async(req, res)=>{
+    const {id} = req.params;
+
+    const {name, email,username,title,office} = req.body;
+    
+    const data = {
+        CN:name,
+        DisplayName:name,
+        SamAccountName:username,
+        UserPrincipalName:email,
+        Title:title,
+        Office:office
+    };
+    await axios.put(`https://nel-api.herokuapp.com/api/nelusers/${id}`,data);
+
+    res.redirect('/users')
+}
