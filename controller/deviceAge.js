@@ -33,3 +33,22 @@ exports.addDevicePage =(req, res)=>{
     
     res.render('addDeviceAge')
 }
+
+exports.addNewDeviceAge = async(req, res)=>{
+   const {devicename,shipdate} = req.body;
+
+   const data = {
+        DeviceName:devicename,
+        ShipDate:shipdate
+   }
+
+   try{ 
+        await axios.post(`https://nel-api.herokuapp.com/api/deviceage`, data);
+        
+        res.redirect('/deviceage');
+
+   }catch(error){   
+       console.log(error);
+   }
+   
+}

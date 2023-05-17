@@ -38,3 +38,23 @@ exports.updateCurrentDevice = async (req, res)=>{
     
     res.redirect('/current');
 }
+
+exports.addCurrentDevice = async(req, res)=>{
+    console.log(req.body);
+    const {ComputerName,Manufacturer,SerialNumber,ModelNumber,Age,CurrentYear,ShipDate} = req.body;
+
+    const data ={
+        ComputerName,
+        Manufacturer,
+        SerialNumber,
+        ModelNumber,
+        Age,
+        CurrentYear,
+        ShipDate,
+    }
+    
+    const result = await axios.post(`https://nel-api.herokuapp.com/api/current`,data);
+    console.log(result);
+
+    res.redirect('/current');
+}
