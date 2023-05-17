@@ -35,3 +35,21 @@ exports.updateUser = async(req, res)=>{
 
     res.redirect('/users')
 }
+
+exports.addNewUser = async(req,res)=>{
+    console.log(req.body);
+    const {name, displayName,email, username,title,office} = req.body;
+
+    const data = {
+        CN:name,
+        DisplayName:displayName,
+        UserPrincipalName:email,
+        SamAccountName:username,
+        Title:title,
+        Office:office
+    }
+
+    const result = await axios.post(`https://nel-api.herokuapp.com/api/nelusers`,data);
+    console.log(result);
+    res.redirect('/users')
+}
