@@ -22,7 +22,7 @@ exports.getAddPage = async(req,res)=>{
 
 exports.updateOldDevice = async(req, res)=>{
     
-    const {ComputerName,Manufacturer,SerialNumber,ModelNumber,Age,CurrentYear, ShipDate, assignedTo,notes} = req.body;
+    const {ComputerName,Manufacturer,SerialNumber,ModelNumber,Age,CurrentYear, AssignedTo,ShipDate,notes} = req.body;
 
     const data = {
         ComputerName: ComputerName,
@@ -32,11 +32,32 @@ exports.updateOldDevice = async(req, res)=>{
         Age:Age,
         CurrentYear:CurrentYear,
         ShipDate:ShipDate,
-        assignTo:assignedTo,
-        notes:notes  
+        notes:notes ,
+        assignedTo:AssignedTo, 
     }
 
     await axios.put(`https://nel-api.herokuapp.com/api/old/${req.params.id}`, data);
    
     res.redirect('/old')
+}
+
+exports.addNewDevice = async(req, res)=>{
+    const {ComputerName,Manufacturer,SerialNumber,ModelNumber,Age,CurrentYear,ShipDate, AssignedTo,Notes} = req.body;
+    
+    const data ={
+        ComputerName: ComputerName,
+        Manufacturer: Manufacturer,
+        SerialNumber:SerialNumber,
+        ModelNumber:ModelNumber,
+        Age:Age,
+        CurrentYear:CurrentYear,
+        ShipDate:ShipDate,
+        assignedTo:AssignedTo,
+        notes:Notes  
+    }
+
+    await axios.post(`https://nel-api.herokuapp.com/api/old`, data);
+
+    res.redirect('/old')
+
 }
