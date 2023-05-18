@@ -52,7 +52,6 @@ exports.addNewDeviceAge = async(req, res)=>{
 }
 
 exports.deleteDevice = async(req, res)=>{
-    console.log(req.params);
 
     const result = await axios.delete(`https://nel-api.herokuapp.com/api/deviceage/${req.params.id}`);   
     

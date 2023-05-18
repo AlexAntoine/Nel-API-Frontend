@@ -61,3 +61,10 @@ exports.addNewDevice = async(req, res)=>{
     res.redirect('/old')
 
 }
+
+exports.deleteDevice = async(req, res)=>{
+
+    const result = await axios.delete(`https://nel-api.herokuapp.com/api/old/${req.params.id}`);
+
+    res.redirect('/old');
+}
