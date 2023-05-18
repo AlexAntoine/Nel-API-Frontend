@@ -42,13 +42,19 @@ exports.addNewDeviceAge = async(req, res)=>{
         ShipDate:shipdate
    }
 
-   try{ 
-        await axios.post(`https://nel-api.herokuapp.com/api/deviceage`, data);
-        
-        res.redirect('/deviceage');
+  
+    await axios.post(`https://nel-api.herokuapp.com/api/deviceage`, data);
+    
+    res.redirect('/deviceage');
 
-   }catch(error){   
-       console.log(error);
-   }
+  
    
+}
+
+exports.deleteDevice = async(req, res)=>{
+    console.log(req.params);
+
+    const result = await axios.delete(`https://nel-api.herokuapp.com/api/deviceage/${req.params.id}`);   
+    
+    res.redirect('/deviceage');
 }
