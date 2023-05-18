@@ -50,6 +50,6 @@ exports.addNewUser = async(req,res)=>{
     }
 
     const result = await axios.post(`https://nel-api.herokuapp.com/api/nelusers`,data);
-    console.log(result);
+
     res.redirect('/users')
 }
