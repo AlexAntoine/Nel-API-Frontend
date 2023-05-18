@@ -53,3 +53,10 @@ exports.addNewUser = async(req,res)=>{
 
     res.redirect('/users')
 }
+
+exports.deleteUser = async(req, res)=>{
+    
+    const result = await axios.delete(`https://nel-api.herokuapp.com/api/nelusers/${req.params.id}`);
+
+    res.redirect('/users')
+}
