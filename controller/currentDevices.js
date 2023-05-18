@@ -58,3 +58,11 @@ exports.addCurrentDevice = async(req, res)=>{
 
     res.redirect('/current');
 }
+
+exports.deleteCurrentDevice  = async(req, res)=>{
+    const {id} = req.params;
+
+    const result = await axios.delete(`https://nel-api.herokuapp.com/api/current/${id}`);
+    
+    res.redirect('/current');
+}
