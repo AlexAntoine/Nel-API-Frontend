@@ -19,7 +19,7 @@ exports.getAddCurrentDevicePage = async (req, res)=>{
 }
 
 exports.updateCurrentDevice = async (req, res)=>{
-
+   
    const {ComputerName,Manufacturer,SerialNumber,ModelNumber,Age,CurrentYear,ShipDate,AssignedTo,Notes} = req.body;
 
    const data = {
@@ -40,29 +40,46 @@ exports.updateCurrentDevice = async (req, res)=>{
 }
 
 exports.addCurrentDevice = async(req, res)=>{
-    console.log(req.body);
-    const {ComputerName,Manufacturer,SerialNumber,ModelNumber,Age,CurrentYear,ShipDate} = req.body;
 
-    const data ={
-        ComputerName,
-        Manufacturer,
-        SerialNumber,
-        ModelNumber,
-        Age,
-        CurrentYear,
-        ShipDate,
-    }
+    // console.log(req.body);
+    // const {ComputerName,Manufacturer,SerialNumber,ModelNumber,OsVersion,ChassisTypesRaw,Age,CurrentYear,CompId,ReplacementCost,shouldRetire,Type,assignedTo,oldEnough,ChassisType,ChassisSubType,ShipDate,notes,LastLogin,GetLastDeviceLogin} = req.body;
+    // const data ={
+    //     ComputerName,
+    //     Manufacturer,
+    //     SerialNumber,
+    //     ModelNumber,
+    //     OsVersion,
+    //     ChassisTypesRaw,
+    //     ShipDate,
+    //     Age,
+    //     CurrentYear,
+    //     CompId,
+    //     ReplacementCost,
+    //     Type,
+    //     assignedTo,
+    //     shouldRetire,
+    //     oldEnough,
+    //     ChassisSubType,
+    //     ChassisType,
+    //     notes,
+    //     LastLogin,
+    //     GetLastDeviceLogin
+    // }
+
+    // const data = {
+    //     ...req.body
+    // }
+
+
     
-    const result = await axios.post(`https://nel-api.herokuapp.com/api/current`,data);
-    console.log(result);
+    // const result = await axios.post(`https://nel-api.herokuapp.com/api/current`,data);
+    // console.log(result);
 
-    res.redirect('/current');
+    // res.redirect('/current');
 }
 
-exports.deleteCurrentDevice  = async(req, res)=>{
-    const {id} = req.params;
+exports.deleteCurrentDevice = async(req, res)=>{
 
-    const result = await axios.delete(`https://nel-api.herokuapp.com/api/current/${id}`);
-    
-    res.redirect('/current');
+    console.log('Hello World');
 }
+

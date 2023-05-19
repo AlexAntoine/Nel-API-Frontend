@@ -1,5 +1,5 @@
 const express = require('express');
-const {getCurrentDevicePage,getCurrentDeviceEditPage, deleteCurrentDevice, getAddCurrentDevicePage,updateCurrentDevice, addCurrentDevice} = require('../controller/currentDevices');
+const {getCurrentDevicePage,getCurrentDeviceEditPage,getAddCurrentDevicePage,updateCurrentDevice, addCurrentDevice, deleteCurrentDevice} = require('../controller/currentDevices');
 
 const router = express.Router();
 
