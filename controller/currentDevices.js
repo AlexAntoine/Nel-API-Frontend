@@ -1,10 +1,11 @@
 const axios = require('axios');
 
+// Get
 exports.getCurrentDevicePage = async(req, res)=>{
 
-    const devices = await axios.get('https://nel-api.herokuapp.com/api/current');
-   
-    res.render('currentdevices', {devices: devices.data.data})
+    const {data} = await axios.get('https://nel-api.herokuapp.com/api/current');
+    
+    res.render('currentDevices', {devices:data.data})
 }
 
 exports.getCurrentDeviceEditPage = async (req, res)=>{
@@ -18,6 +19,7 @@ exports.getAddCurrentDevicePage = async (req, res)=>{
    res.render('addCurrentDevice')
 }
 
+// PUT
 exports.updateCurrentDevice = async (req, res)=>{
    
    const {ComputerName,Manufacturer,SerialNumber,ModelNumber,Age,CurrentYear,ShipDate,AssignedTo,Notes} = req.body;
@@ -39,6 +41,8 @@ exports.updateCurrentDevice = async (req, res)=>{
     res.redirect('/current');
 }
 
+
+//POST
 exports.addCurrentDevice = async(req, res)=>{
 
     // console.log(req.body);
@@ -78,6 +82,7 @@ exports.addCurrentDevice = async(req, res)=>{
     // res.redirect('/current');
 }
 
+// Delete
 exports.deleteCurrentDevice = async(req, res)=>{
 
     console.log('Hello World');
