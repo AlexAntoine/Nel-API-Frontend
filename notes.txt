@@ -1,16 +1,7 @@
 Re purposing this app for NEL API front end
 
-<% data.forEach((d)=>{ %>
-                        <tr>
-                            <td><%= d.ComputerName %></td>
-                            <td><%= d.ModelNumber%></td>
-                            <td>$<%= d.Manufacturer %></td>
-                            <td>
-                                <a href="edit/" class="btn btn-primary">Edit</a>
-                                <form style="display: inline;" action="/delete" method="POST">
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <button style="cursor:pointer" type="submit" class="btn btn-danger ml-2">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                    <% }) %>
+05/25/2023 -Working on sign in. User is able to sign in but 
+the error flash message doesn't work.
+
+also need to figure out how to implement the middleware better.
+refere to previous repos on API's
