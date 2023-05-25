@@ -86,5 +86,7 @@ exports.addCurrentDevice = async(req, res)=>{
 exports.deleteCurrentDevice = async(req, res)=>{
 
     console.log('Hello World');
+    console.log(req.params);
+    console.log(req.body);
 }
 
