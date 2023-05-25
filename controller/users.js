@@ -14,9 +14,8 @@ exports.getUserEditPage = async(req, res)=>{
 exports.getUsersPage = async(req, res)=>{
     
     const {data} = await axios.get('https://nel-api.herokuapp.com/api/nelusers');
-   
-    console.log(data);
-    // res.render('users', {users:data.data});
+
+    res.render('users', {users:data.data});
 }
 
 exports.updateUser = async(req, res)=>{

@@ -8,7 +8,7 @@ exports.getSignupPage = async(req, res)=>{
 
 exports.sendNewUser = async(req, res)=>{
     const {name, email, password} = req.body;
-    console.log(req.body);
+    
     const user = {
         name,
         email,
