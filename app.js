@@ -16,6 +16,8 @@ app.use(urlencoded({extended:true}))
 app.use(express.static(path.join(__dirname,'public')));
 
 //Routes
+const homeRouter = require('./routes/login');
+const signupRouter = require('./routes/signup');
 const employeeRouter = require('./routes/employee');
 const userRoute = require('./routes/users');
 const oldRoute = require('./routes/oldDevices');
@@ -26,6 +28,11 @@ app.use(session({secret:'abcd', resave:true, saveUninitialized:true}));
 app.use(flash())
 app.use(methodOverride('_method'));
 
+app.use(session({
+    secret:"abcd",
+    resave:true,
+    saveUninitialized:true
+}));
 
 app.use((req, res,next)=>{
     res.locals.success_msg = req.flash(('success_msg'));
@@ -34,6 +41,8 @@ app.use((req, res,next)=>{
     next();
 });
 
+app.use('/',homeRouter)
+app.use(signupRouter);
 app.use(employeeRouter);
 app.use(userRoute);
 app.use(deviceAge);
