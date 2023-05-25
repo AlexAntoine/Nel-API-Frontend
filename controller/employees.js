@@ -1,5 +1,5 @@
 const axios = require('axios');
-const Employee = require('../models/employees');
+const Employee = require('../models/users');
 
 exports.homePage = async(req, res)=>{
     // try {
