@@ -27,12 +27,22 @@
             <div class="mr-5">
                 <ul class="navbar-nav mr-auto mr-0">
 
+                    <%if(currentUser){%>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/"><%= currentUser.name%></a>
+                        </li>
+                    <%}%>
+
                     <li class="nav-item">
                         <a class="nav-link text-white" href="/add/users">Add New User</b></a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link text-white" href="/">Search</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/logout">Logout</a>
                     </li>
                 </ul>
             </div>
