@@ -4,6 +4,3 @@ exports.getLoginPage = async(req, res, next)=>{
 
 }
 
-exports.userLogin =async (req, res, next)=>{
-    console.log('hello');
-}
