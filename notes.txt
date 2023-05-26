@@ -1,7 +1,7 @@
 Re purposing this app for NEL API front end
 
 05/25/2023 -Working on sign in. User is able to sign in but 
-the error flash message doesn't work.
+the error flash message doesn't work. - Fixed
 
 also need to figure out how to implement the middleware better.
 refere to previous repos on API's
