@@ -19,6 +19,7 @@ app.use(urlencoded({extended:true}))
 app.use(express.static(path.join(__dirname,'public')));
 
 //Routes
+const forgetPasswordRouter = require('./routes/forgetPassword')
 const homeRouter = require('./routes/login');
 const signupRouter = require('./routes/signup');
 const employeeRouter = require('./routes/employee');
@@ -57,6 +58,7 @@ app.use((req, res,next)=>{
 });
 
 app.use('/',homeRouter)
+app.use(forgetPasswordRouter)
 app.use(signupRouter);
 app.use(employeeRouter);
 app.use(userRoute);

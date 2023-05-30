@@ -15,6 +15,12 @@ const userSchema = mongoose.Schema({
         type:String,
         //hides password
         select:false
+    },
+    resetPasswordToken:{
+        type:String
+    },
+    restPasswordExpires:{
+        type:Date
     }
 });
 
