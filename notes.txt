@@ -6,4 +6,7 @@ the error flash message doesn't work. - Fixed
 also need to figure out how to implement the middleware better.
 refere to previous repos on API's
 
+will need to use mailtrap to implement email function. Have to figure out how to 
+get email function to work. Maybe look into sendgrid again. 
+
 Link to HTML files - https://github.com/ghulamabbas2/node-js-bootcamp/tree/master/AuthApp
