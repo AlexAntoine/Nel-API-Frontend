@@ -5,3 +5,5 @@ the error flash message doesn't work. - Fixed
 
 also need to figure out how to implement the middleware better.
 refere to previous repos on API's
+
+Link to HTML files - https://github.com/ghulamabbas2/node-js-bootcamp/tree/master/AuthApp
