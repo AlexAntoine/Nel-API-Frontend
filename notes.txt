@@ -11,4 +11,6 @@ get email function to work. Maybe look into sendgrid again.
 
 Mailtrap actually worked I was looking in the wrong place. Will try sendgrid next.
 
+login into mailtrap with office 365 account from work
+
 Link to HTML files - https://github.com/ghulamabbas2/node-js-bootcamp/tree/master/AuthApp
