@@ -9,4 +9,6 @@ refere to previous repos on API's
 will need to use mailtrap to implement email function. Have to figure out how to 
 get email function to work. Maybe look into sendgrid again. 
 
+Mailtrap actually worked I was looking in the wrong place. Will try sendgrid next.
+
 Link to HTML files - https://github.com/ghulamabbas2/node-js-bootcamp/tree/master/AuthApp
