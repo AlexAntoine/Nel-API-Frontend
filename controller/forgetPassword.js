@@ -18,7 +18,7 @@ exports.recoverPassword = async(req, res, done)=>{
          user.resetPasswordToken = token;
          user.restPasswordExpires =  Date.now() + 1800000 // 30 minutes;
      
-        const result = user.save();
+        const result = await user.save();
         
         sendEmail(req, res, user, token)
         
