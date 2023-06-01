@@ -16,7 +16,7 @@ exports.getNewPasswordPage = async(req,res)=>{
     res.render('newPassword',{token:req.params.token})
 }
 
-exports.sendNewPassword = async(req, res)=>{
+exports.sendNewPassword = async(req, res,next)=>{
     
     try{
         const user = await User.findOne({resetPasswordToken:req.params.token, restPasswordExpires: {$gt:Date.now()} });
@@ -30,19 +30,19 @@ exports.sendNewPassword = async(req, res)=>{
             throw new Error('Passwords do not match');
         }
         
-        user.setPassword(req.body.password);
+        user.setPassword(req.body.password, err =>{
+            user.resetPasswordToken = undefined;
+            user.resetPasswordExpires = undefined;
 
-        user.resetPasswordToken = undefined;
-        user.restPasswordExpires = undefined;
+            user.save(err =>{
+                req.login(user, err =>{
+                    next(err,user);
+                });
+            });
+        })
 
-        user.save((updateUser)=>{
-            req.login(updateUser,error =>{
-                req.flash('success_mgs', 'updated');
-                res.redirect('/');
-            })
-        });
-        //implement email function
-        
+
+
     }catch(error){
         console.log(error)
         req.flash('error_msg',`${error.message}`);
@@ -66,7 +66,7 @@ exports.recoverPassword = async(req, res)=>{
          user.resetPasswordToken = token;
          user.restPasswordExpires =  Date.now() + 1800000 // 30 minutes;
      
-        const result = await user.save();
+       await user.save();
         
         sendEmail(req, res, user, token)
         
@@ -102,8 +102,7 @@ const sendEmail = async(req, res,user, token)=>{
         to: user.email,
         from:'Don-Alex Antoine aantoine@newenglandlab.com',
         subject:'Recovery Email from Auth Project',
-        text:`Please click the following link to recover your password\n\nhttp://${req.headers.host}/reset/${token}\n\n 
-        If you did not request this, please ignore this emai`
+        text:`Please click the following link to recover your password\n\nhttp://${req.headers.host}/reset/${token}\n\nIf you did not request this, please ignore this email`
     }
 
    await smtpTransport.sendMail(mailOptions);
