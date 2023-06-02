@@ -2,6 +2,7 @@ require('dotenv')
 const crypto = require('crypto')
 const nodemailer = require('nodemailer');
 const User = require('../models/users');
+const { promisify } = require('util');
 
 exports.forgetPassword = (req, res)=>{
 
@@ -16,39 +17,39 @@ exports.getNewPasswordPage = async(req,res)=>{
     res.render('newPassword',{token:req.params.token})
 }
 
-exports.sendNewPassword = async(req, res,next)=>{
+exports.sendNewPassword = async(req, res,done)=>{
     
-    try{
-        const user = await User.findOne({resetPasswordToken:req.params.token, restPasswordExpires: {$gt:Date.now()} });
+   try {
      
-        if(!user){
-            console.log(user);
-            throw new Error('Token is invalid or has been expired')
-        }
-        
+         const user = await User.findOne({resetPasswordToken: req.params.token, resetPasswordExpires : {$gt : Date.now() } })
+
         if(req.body.password !== req.body.confirmpassword){
-            throw new Error('Passwords do not match');
+            req.flash('error_msg','password does not match');
+            throw new Error('Passwords do not match ')
+        }
+
+        console.log(user);
+        if(!user){
+            req.flash('error_msg','User does not exist or token is invalid')
+            throw new Error('User does not exist')
         }
         
-        user.setPassword(req.body.password, err =>{
+        user.setPassword(req.body.password,err =>{
             user.resetPasswordToken = undefined;
             user.resetPasswordExpires = undefined;
 
             user.save(err =>{
-                req.login(user, err =>{
-                    next(err,user);
-                });
-            });
+                req.logIn(user, err =>{
+                    done(err, user)
+                })
+            })
         })
-
-
-
-    }catch(error){
-        console.log(error)
-        req.flash('error_msg',`${error.message}`);
+   } catch (error) {
+    
+        console.log('error: ', error);
+        req.flash('error_msg', `${error.message}`);
         res.redirect('/forgot')
-    }
-  
+   }
 
 }
 
