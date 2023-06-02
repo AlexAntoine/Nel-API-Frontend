@@ -13,4 +13,6 @@ Mailtrap actually worked I was looking in the wrong place. Will try sendgrid nex
 
 login into mailtrap with office 365 account from work
 
+06/02/2023 - Getting use new password to save is still an issue 
+
 Link to HTML files - https://github.com/ghulamabbas2/node-js-bootcamp/tree/master/AuthApp
