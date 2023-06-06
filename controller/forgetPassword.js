@@ -2,7 +2,7 @@ require('dotenv')
 const crypto = require('crypto')
 const nodemailer = require('nodemailer');
 const User = require('../models/users');
-const { promisify } = require('util');
+const async =require('async')
 
 exports.forgetPassword = (req, res)=>{
 
@@ -10,47 +10,50 @@ exports.forgetPassword = (req, res)=>{
 }
 
 exports.getNewPasswordPage = async(req,res)=>{
-    const user = await User.findOne({resetPasswordToken:req.params.token, restPasswordExpires: {$gt:Date.now()} });
-
-    // console.log(user);
+//    console.log(req.params.token);
+    User.findOne({resetPasswordToken:req.params.token, resetPasswordExpires:{$gt:Date.now()}});
+//    console.log(user);
 
     res.render('newPassword',{token:req.params.token})
 }
 
 exports.sendNewPassword = async(req, res,done)=>{
     
-   try {
-     
-         const user = await User.findOne({resetPasswordToken: req.params.token, resetPasswordExpires : {$gt : Date.now() } })
+    async.waterfall([
+        (done) => {
+            User.findOne({resetPasswordToken: req.params.token, resetPasswordExpires : {$gt : Date.now() } })
+                .then(user => {
+                    if(!user) {
+                        req.flash('error_msg', 'Password reset token in invalid or has been expired.');
+                        res.redirect('/forgot');
+                    }
 
-        if(req.body.password !== req.body.confirmpassword){
-            req.flash('error_msg','password does not match');
-            throw new Error('Passwords do not match ')
-        }
+                    if(req.body.password !== req.body.confirmpassword) {
+                        req.flash('error_msg', "Password don't match.");
+                        return res.redirect('/forgot');
+                    }
 
-        console.log(user);
-        if(!user){
-            req.flash('error_msg','User does not exist or token is invalid')
-            throw new Error('User does not exist')
-        }
-        
-        user.setPassword(req.body.password,err =>{
-            user.resetPasswordToken = undefined;
-            user.resetPasswordExpires = undefined;
+                    user.setPassword(req.body.password, err => {
+                        user.resetPasswordToken = undefined;
+                        user.resetPasswordExpires = undefined;
 
-            user.save(err =>{
-                req.logIn(user, err =>{
-                    done(err, user)
+                        user.save(err => {
+                            req.logIn(user, err => {
+                                done(err, user);
+                            })
+                        });
+                    });
                 })
-            })
-        })
-   } catch (error) {
-    
-        console.log('error: ', error);
-        req.flash('error_msg', `${error.message}`);
-        res.redirect('/forgot')
-   }
+                .catch(err => {
+                    req.flash('error_msg', 'ERROR: '+err);
+                    res.redirect('/forgot');
+                });
+        },
 
+    ], err => {
+        res.redirect('/login');
+    });
+   
 }
 
 exports.recoverPassword = async(req, res)=>{
@@ -65,7 +68,7 @@ exports.recoverPassword = async(req, res)=>{
          }
 
          user.resetPasswordToken = token;
-         user.restPasswordExpires =  Date.now() + 1800000 // 30 minutes;
+         user.resetPasswordExpires =  Date.now() + 1800000 // 30 minutes;
      
        await user.save();
         
