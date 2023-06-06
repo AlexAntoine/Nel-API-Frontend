@@ -15,4 +15,7 @@ login into mailtrap with office 365 account from work
 
 06/02/2023 - Getting use new password to save is still an issue 
 
+06/06/2023 - Password reset function works after copying and pasting the official code.
+Now I have to figure out why it work and why my methods didn't work. But that's for a later day.
+
 Link to HTML files - https://github.com/ghulamabbas2/node-js-bootcamp/tree/master/AuthApp
