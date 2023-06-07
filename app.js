@@ -21,6 +21,7 @@ app.use(express.static(path.join(__dirname,'public')));
 //Routes
 const forgetPasswordRouter = require('./routes/forgetPassword')
 const homeRouter = require('./routes/login');
+const changePasswordRouter = require('./routes/changePassword');
 const signupRouter = require('./routes/signup');
 const employeeRouter = require('./routes/employee');
 const userRoute = require('./routes/users');
@@ -57,8 +58,9 @@ app.use((req, res,next)=>{
     next();
 });
 
-app.use('/',homeRouter)
-app.use(forgetPasswordRouter)
+app.use('/',homeRouter);
+app.use(changePasswordRouter)
+app.use(forgetPasswordRouter);
 app.use(signupRouter);
 app.use(employeeRouter);
 app.use(userRoute);
