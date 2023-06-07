@@ -19,3 +19,5 @@ login into mailtrap with office 365 account from work
 Now I have to figure out why it work and why my methods didn't work. But that's for a later day.
 
 Link to HTML files - https://github.com/ghulamabbas2/node-js-bootcamp/tree/master/AuthApp
+
+Links to look at later - https://stackoverflow.com/questions/48453792/error-reqlogin-requires-a-callback-function-passport-js
