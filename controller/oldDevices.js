@@ -9,10 +9,12 @@ exports.getOldDevicesPage = async(req, res)=>{
 }
 
 exports.getOldDevicesEditPage = async(req, res)=>{
-   const {id} = req.params;
+   getOldDeviceData(req.token);
     
-   const {data} =  await axios.get(`https://nel-api.herokuapp.com/api/old/${id}`);
-   res.render('editOldDevice', {devices:data.data});
+//    const {id} = req.params;
+    
+//    const {data} =  await axios.get(`https://nel-api.herokuapp.com/api/old/${id}`);
+//    res.render('editOldDevice', {devices:data.data});
     
 }
 
@@ -67,4 +69,16 @@ exports.deleteDevice = async(req, res)=>{
     const result = await axios.delete(`https://nel-api.herokuapp.com/api/old/${req.params.id}`);
 
     res.redirect('/old');
+}
+
+const getOldDeviceData = async(token)=>{
+
+    const data  = await axios.get(`https://nel-api.herokuapp.com/api/old`, {
+        headers:{
+            'Authorization': `Bearer ${token}`
+        }
+    });
+
+    return console.log(data);
+
 }
