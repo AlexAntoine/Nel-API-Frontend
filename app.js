@@ -23,7 +23,6 @@ const forgetPasswordRouter = require('./routes/forgetPassword')
 const homeRouter = require('./routes/login');
 const changePasswordRouter = require('./routes/changePassword');
 const signupRouter = require('./routes/signup');
-const employeeRouter = require('./routes/employee');
 const userRoute = require('./routes/users');
 const oldRoute = require('./routes/oldDevices');
 const deviceAge= require('./routes/deviceAge');
@@ -62,7 +61,6 @@ app.use('/',homeRouter);
 app.use(changePasswordRouter)
 app.use(forgetPasswordRouter);
 app.use(signupRouter);
-app.use(employeeRouter);
 app.use(userRoute);
 app.use(deviceAge);
 app.use(oldRoute);
