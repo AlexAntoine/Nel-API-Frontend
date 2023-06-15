@@ -25,3 +25,7 @@ Link to HTML files - https://github.com/ghulamabbas2/node-js-bootcamp/tree/maste
 Links to look at later - https://stackoverflow.com/questions/48453792/error-reqlogin-requires-a-callback-function-passport-js
 
 Try working with axiosInstance - https://www.youtube.com/watch?v=j22XDQkdMfw&ab_channel=CodeWithBen
+
+Header refreshes with every request which makes it difficult to save a tokent to the header
+or the use. User information is not saved with every request hence why I need to login ever time.
+Look at task manager project for more ideas. 
