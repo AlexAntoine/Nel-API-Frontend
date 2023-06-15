@@ -1,5 +1,5 @@
 const axios = require('axios');
-
+const {loginApi, getUsersData} = require('../utils/apiCalls');
 exports.getNewUserPage = async(req, res)=>{
     res.render('addUser');
 }
@@ -11,9 +11,11 @@ exports.apiLogin = async(req, res, next)=>{
 }
 
 exports.getHome = async(req, res,next)=>{
-    getUsersData(req);
+    const token = await loginApi(req);
+    console.log('line 15: ',token);
+    const data =  await getUsersData(token);
 
-   
+    console.log('line 18: ',data);
     res.render('home')
 }
 
@@ -25,7 +27,8 @@ exports.getUserEditPage = async(req, res)=>{
 }
 
 exports.getUsersPage = async(req, res)=>{
-    
+    console.log('hello');
+    console.log(req.token);
 }
 
 exports.updateUser = async(req, res)=>{

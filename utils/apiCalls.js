@@ -20,11 +20,11 @@ const getDeviceAgeData = async(token)=>{
         }
     });
 
-    return console.log(data);
+    return data;
 
 }
 
-const getUsersData = async(token)=>{
+exports.getUsersData = async(token)=>{
 
     const data  = await axios.get(`https://nel-api.herokuapp.com/api/users`, {
         headers:{
@@ -32,18 +32,20 @@ const getUsersData = async(token)=>{
         }
     });
 
-    return console.log(data);
+    return data;
 
 }
 
-const loginApi = async(req)=>{
+exports.loginApi = async(req)=>{
     const userData = {
         email:req.user.email,
         role:'user'
     }
 
     const {data} = await axios.post(`https://nel-api.herokuapp.com/api/auth/web/login`, userData);
-    console.log(data.token);
+    // console.log(data.token);
 
     req.token = data.token;
+
+    return data.token;
 }
