@@ -15,6 +15,7 @@ exports.logOut = async(req, res, next)=>{
         res.redirect('/')
     });
    
-
 }
+
+
 
