@@ -4,6 +4,19 @@ exports.getNewUserPage = async(req, res)=>{
     res.render('addUser');
 }
 
+//Activates after hitting Generate Data button
+exports.apiLogin = async(req, res, next)=>{
+   
+
+}
+
+exports.getHome = async(req, res,next)=>{
+    getUsersData(req);
+
+   
+    res.render('home')
+}
+
 exports.getUserEditPage = async(req, res)=>{
     
     const {data} = await axios.get(`https://nel-api.herokuapp.com/api/nelusers/${req.params.id}`);
@@ -13,9 +26,6 @@ exports.getUserEditPage = async(req, res)=>{
 
 exports.getUsersPage = async(req, res)=>{
     
-    const {data} = await axios.get('https://nel-api.herokuapp.com/api/nelusers');
-
-    res.render('users', {users:data.data});
 }
 
 exports.updateUser = async(req, res)=>{
@@ -37,7 +47,6 @@ exports.updateUser = async(req, res)=>{
 }
 
 exports.addNewUser = async(req,res)=>{
-    console.log(req.body);
     const {name, displayName,email, username,title,office} = req.body;
 
     const data = {
@@ -59,3 +68,8 @@ exports.deleteUser = async(req, res)=>{
 
     res.redirect('/users')
 }
+
+
+
+
+

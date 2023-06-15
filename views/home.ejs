@@ -1,0 +1,10 @@
+<%- include('partials/header') -%>
+<div class="container w-25 mt-2">
+    <%- include('partials/messages') -%>
+    <h1 class="text-center">Dashboard</h1>
+    <form action="/home" method="POST">
+        <button type="submit" class="btn btn-danger btn-block mt-3">Generate Data</button>
+    </form>
+    
+</div>
+<%- include('partials/footer') -%>
