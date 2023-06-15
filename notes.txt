@@ -23,3 +23,5 @@ Have to add send email function after password reset
 Link to HTML files - https://github.com/ghulamabbas2/node-js-bootcamp/tree/master/AuthApp
 
 Links to look at later - https://stackoverflow.com/questions/48453792/error-reqlogin-requires-a-callback-function-passport-js
+
+Try working with axiosInstance - https://www.youtube.com/watch?v=j22XDQkdMfw&ab_channel=CodeWithBen
