@@ -1,34 +1,28 @@
 const axios = require('axios');
-const {loginApi, getUsersData} = require('../utils/apiCalls');
+const {loginApi, getUsersData, getSingleUsersData} = require('../utils/apiCalls');
+
 exports.getNewUserPage = async(req, res)=>{
     res.render('addUser');
 }
 
-//Activates after hitting Generate Data button
-exports.apiLogin = async(req, res, next)=>{
-   
-
-}
-
-exports.getHome = async(req, res,next)=>{
-    const token = await loginApi(req);
-    console.log('line 15: ',token);
-    const data =  await getUsersData(token);
-
-    console.log('line 18: ',data);
-    res.render('home')
-}
-
 exports.getUserEditPage = async(req, res)=>{
-    
-    const {data} = await axios.get(`https://nel-api.herokuapp.com/api/nelusers/${req.params.id}`);
-    
-    res.render('editUser', {user:data.data})
+    console.log(req);
+    // const token = await loginApi(req);
+
+    // const data = getSingleUsersData(req.params.id, token)
+
+    // console.log(data);
+
 }
 
 exports.getUsersPage = async(req, res)=>{
-    console.log('hello');
-    console.log(req.token);
+    
+    const token = await loginApi(req);
+   
+    const data  = await getUsersData(token);
+
+    console.log('line 18: ',data);
+    res.render('users',{users:data})
 }
 
 exports.updateUser = async(req, res)=>{

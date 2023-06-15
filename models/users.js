@@ -16,6 +16,10 @@ const userSchema = mongoose.Schema({
         //hides password
         select:false
     },
+
+    token:{
+        type:String
+    },
     resetPasswordToken:{
         type:String
     },

@@ -5,8 +5,8 @@ const {getCurrentDevicePage,getCurrentDeviceEditPage,getAddCurrentDevicePage,upd
 const router = express.Router();
 
 router.route('/current').get(isAuthenticated, getCurrentDevicePage);
-router.route('/edit/current/:id').get(isAuthenticated,getCurrentDeviceEditPage).put(updateCurrentDevice);
-router.route('/add/current').get(isAuthenticated,getAddCurrentDevicePage).post(addCurrentDevice);
-router.route('/delete').post(isAuthenticated,deleteCurrentDevice);
+router.route('/edit/current/:id').get(getCurrentDeviceEditPage).put(updateCurrentDevice);
+router.route('/add/current').get(getAddCurrentDevicePage).post(addCurrentDevice);
+router.route('/delete').post(deleteCurrentDevice);
 
 module.exports = router;
