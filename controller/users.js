@@ -6,23 +6,27 @@ exports.getNewUserPage = async(req, res)=>{
 }
 
 exports.getUserEditPage = async(req, res)=>{
-    console.log(req);
-    // const token = await loginApi(req);
+    const data = await getSingleUsersData(req.params.id, req.session.token)
 
-    // const data = getSingleUsersData(req.params.id, token)
-
-    // console.log(data);
-
+    res.render('editUser',{user:data});
 }
 
 exports.getUsersPage = async(req, res)=>{
-    
-    const token = await loginApi(req);
-   
-    const data  = await getUsersData(token);
+    if(!req.session.token){
+        console.log('Hello');
 
-    console.log('line 18: ',data);
-    res.render('users',{users:data})
+        const token = await loginApi(req);
+        req.session.token  = token;
+    
+        const data  = await getUsersData(token);
+    
+        res.render('users',{users:data})
+    }
+    
+   const data = await getUsersData(req.session.token);
+
+   res.render('users',{users:data});
+   
 }
 
 exports.updateUser = async(req, res)=>{

@@ -1,4 +1,5 @@
 const passport = require('passport');
+const {loginApi } = require('../utils/apiCalls');
 const User =require('../models/users')
 
 exports.getSignupPage = async(req, res)=>{
@@ -8,14 +9,13 @@ exports.getSignupPage = async(req, res)=>{
 
 exports.sendNewUser = async(req, res)=>{
     const {name, email, password} = req.body;
-    
+
     const user = {
         name,
         email,
     }
 
     User.register(user,password,(err, user)=>{
-
         if(err){
             req.flash('error_msg','error '+err);
             res.redirect('/signup');

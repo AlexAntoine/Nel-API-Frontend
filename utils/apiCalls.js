@@ -40,7 +40,7 @@ exports.getUsersData = async(token)=>{
 //GET Single user data
 exports.getSingleUsersData = async(id, token)=>{
 
-    const {data}  = await axios.get(`https://nel-api.herokuapp.com/api/nelusers/:${id}`, {
+    const {data}  = await axios.get(`https://nel-api.herokuapp.com/api/nelusers/${id}`, {
         headers:{
             'Authorization': `Bearer ${token}`
         }
@@ -50,7 +50,7 @@ exports.getSingleUsersData = async(id, token)=>{
 
 }
 
-exports.loginApi = async(req)=>{
+exports.loginApi = async(req, email)=>{
    
     const userData = {
         email:req.user.email,
@@ -60,9 +60,7 @@ exports.loginApi = async(req)=>{
     const {data} = await axios.post(`https://nel-api.herokuapp.com/api/auth/web/login`, userData);
     // console.log(data.token);
 
-    req.user.token = data.token;
-    // console.log('line 49: ', req.user.token);
-    console.log('line 50: ', req);
+    // console.log('line 50: ', req);
 
     return data.token;
 }
