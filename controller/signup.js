@@ -1,5 +1,4 @@
 const passport = require('passport');
-const {loginApi } = require('../utils/apiCalls');
 const User =require('../models/users')
 
 exports.getSignupPage = async(req, res)=>{

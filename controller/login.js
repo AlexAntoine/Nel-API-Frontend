@@ -11,9 +11,7 @@ exports.logOut = async(req, res, next)=>{
         if(err){
             return next(err);
         }
-
-        req.session.token = undefined;
-        req.session.user = null;
+        
         req.flash('success_msg', 'You have been logged out');
         res.redirect('/')
     });

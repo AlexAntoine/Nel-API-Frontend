@@ -32,15 +32,9 @@ const User = require('./models/users')
 
 localDb();
 
-app.use(session({secret:'abcd', resave:true, saveUninitialized:true}));
+app.use(session({secret:'abcd', resave:true, saveUninitialized:true, cookie:{maxAge:24 * 60 * 60 * 1000} }));
 app.use(flash())
 app.use(methodOverride('_method'));
-
-app.use(session({
-    secret:"abcd",
-    resave:true,
-    saveUninitialized:true
-}));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -64,7 +58,7 @@ app.use(signupRouter);
 app.use(userRoute);
 app.use(deviceAge);
 app.use(oldRoute);
-app.use(currentdevice)
+app.use(currentdevice);
 
 
 module.exports = app;

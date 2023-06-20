@@ -1,30 +1,31 @@
 const axios = require('axios');
-const Users = require('../models/users');
 
-const getOldDeviceData = async(token)=>{
+// Add new User
+exports.addUser = async(userData,token)=>{
 
-    const data  = await axios.get(`https://nel-api.herokuapp.com/api/old`, {
+    const data  = await axios.post(`https://nel-api.herokuapp.com/api/nelusers`, userData, {
         headers:{
             'Authorization': `Bearer ${token}`
         }
     });
 
-    return console.log(data);
-
+    return data.data;
 }
 
-const getDeviceAgeData = async(token)=>{
+// Update User
+exports.updateAUser = async(id, userData,token)=>{
 
-    const data  = await axios.get(`https://nel-api.herokuapp.com/api/deviceage`, {
+    const data  = await axios.put(`https://nel-api.herokuapp.com/api/nelusers/${id}`, userData, {
         headers:{
             'Authorization': `Bearer ${token}`
         }
     });
 
-    return data;
-
+    return data.data;
 }
 
+
+// Get All Users Data
 exports.getUsersData = async(token)=>{
 
     const {data}  = await axios.get(`https://nel-api.herokuapp.com/api/nelusers`, {
@@ -50,6 +51,7 @@ exports.getSingleUsersData = async(id, token)=>{
 
 }
 
+// Log into Api
 exports.loginApi = async(req, email)=>{
    
     const userData = {
@@ -63,4 +65,16 @@ exports.loginApi = async(req, email)=>{
     // console.log('line 50: ', req);
 
     return data.token;
+}
+
+// Delete User
+exports.removeUser = async(id,token)=>{
+
+    const data  = await axios.delete(`https://nel-api.herokuapp.com/api/nelusers/${id}`,{
+        headers:{
+            'Authorization': `Bearer ${token}`
+        }
+    });
+
+    return data.data;
 }
