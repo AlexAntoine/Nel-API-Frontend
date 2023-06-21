@@ -1,10 +1,10 @@
 const express = require('express');
-const {isAuthenticated} = require('../middleware/auth');
+const {auth} = require('../middleware/auth');
 const {getCurrentDevicePage,getCurrentDeviceEditPage,getAddCurrentDevicePage,updateCurrentDevice, addCurrentDevice, deleteCurrentDevice} = require('../controller/currentDevices');
 
 const router = express.Router();
 
-router.route('/current').get(isAuthenticated, getCurrentDevicePage);
+router.route('/current').get(auth, getCurrentDevicePage);
 router.route('/edit/current/:id').get(getCurrentDeviceEditPage).put(updateCurrentDevice);
 router.route('/add/current').get(getAddCurrentDevicePage).post(addCurrentDevice);
 router.route('/delete').post(deleteCurrentDevice);

@@ -1,6 +1,6 @@
 const passport = require('passport');
 
-exports.isAuthenticated = (req, res, next)=>{
+exports.auth = (req, res, next)=>{
     if(req.isAuthenticated()){
         return next ();
     }

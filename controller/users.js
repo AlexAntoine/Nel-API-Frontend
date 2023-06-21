@@ -7,31 +7,53 @@ exports.getNewUserPage = async(req, res)=>{
 
 exports.getUserEditPage = async(req, res)=>{
 
-    try {
-        console.log(req.session.cookie.token);
-        // const data = await getSingleUsersData(req.params.id, req.session.cookie.token)
+    console.log(req);
+    // try{
+    //     const data = await getSingleUsersData(req.params.id, res.session.token);
         
-        res.render('editUser',{user:''});
-        
-    } catch (error) {
-        console.log(error);
-        
-        res.redirect('/users');
+    //     res.render('editUser',{user:''});
 
-    }
+    // }catch(error){
+
+    //     console.log(error);
+        
+    //     res.redirect('/users');
+    // }
+    // try {
+        
+    //     console.log(req.session.cookie.token);
+    //     const data = await getSingleUsersData(req.params.id, req.session.cookie.token)
+        
+    //     res.render('editUser',{user:''});
+        
+    // } catch (error) {
+    //     console.log(error);
+        
+    //     res.redirect('/users');
+
+    // }
 }
 
 exports.getUsersPage = async(req, res)=>{
-    if(!req.session.cookie.token){
-
-        const token = await loginApi(req);
-        req.session.cookie.token = token
+    // console.log(req);
+    // if(!req.session.cookie.token){
+    //     console.log('Hello 1');
+    //     const token = await loginApi(req);
+    //     req.session.cookie.token = token;
         
-        const data  = await getUsersData(req.session.cookie.token);
+    //     const data  = await getUsersData(token);
     
-        res.render('users',{users:data})
-    }
-     
+    //     res.render('users',{users:data})
+    // }
+
+    const token =await loginApi(req);
+    req.session.token = token;
+
+    console.log('line 54: ',req);
+
+    const data  = await getUsersData(token); 
+    res.render('users',{users:data})   
+   
 }
 
 exports.updateUser = async(req, res)=>{
