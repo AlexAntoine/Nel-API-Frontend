@@ -1,5 +1,5 @@
-const passport = require('passport');
-const User =require('../models/users')
+const User =require('../models/users');
+const {loginApi} = require('../utils/userCalls');
 
 exports.getSignupPage = async(req, res)=>{
 
@@ -7,23 +7,20 @@ exports.getSignupPage = async(req, res)=>{
 }
 
 exports.sendNewUser = async(req, res)=>{
-    const {name, email, password} = req.body;
+   
+    const newUser = await User.create(req.body);
 
-    const user = {
-        name,
-        email,
-    }
+    const token = await loginApi(req);
+    console.log('line 13 Token: ', token);
 
-    User.register(user,password,(err, user)=>{
-        if(err){
-            req.flash('error_msg','error '+err);
-            res.redirect('/signup');
-            console.log(err)
-        }
+    newUser.tokens = newUser.tokens.concat({token})
 
-        passport.authenticate('local')(req,res,()=>{
-            req.flash('success_msg', 'Account Created Succcessfully');
-            res.redirect('/login')
-        })
-    })
+    const result = await newUser.save();
+    console.log('line 19 result: ',result);
+
+    res.cookie('token',token,{
+        httpOnly:true
+    });
+
+    res.redirect('/users')
 }
