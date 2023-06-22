@@ -7,7 +7,7 @@ exports.getNewUserPage = async(req, res)=>{
 
 exports.getUserEditPage = async(req, res)=>{
 
-    console.log(req);
+    console.log(req.cookies.token);
     // try{
     //     const data = await getSingleUsersData(req.params.id, res.session.token);
         
@@ -35,24 +35,26 @@ exports.getUserEditPage = async(req, res)=>{
 }
 
 exports.getUsersPage = async(req, res)=>{
-    // console.log(req);
-    // if(!req.session.cookie.token){
-    //     console.log('Hello 1');
-    //     const token = await loginApi(req);
-    //     req.session.cookie.token = token;
-        
-    //     const data  = await getUsersData(token);
-    
-    //     res.render('users',{users:data})
+
+    console.log(req.cookies.token);
+
+    const data = await getUsersData(req.cookies.token);
+
+    res.render('users', {users:data});
+    // try{
+    //     const data = await getUsersData(req.cookies.token);
+
+    //     if(data === 'Please Authenticate'){
+    //         console.log('Hello');
+    //         throw new Error('Please Authenticate')
+    //     }
+    //     res.render('users', {users:data});
+
+    // }catch(error){
+    //     console.log(error);
+    //     res.render('users', {users:[]});
     // }
-
-    const token =await loginApi(req);
-    req.session.token = token;
-
-    console.log('line 54: ',req);
-
-    const data  = await getUsersData(token); 
-    res.render('users',{users:data})   
+  
    
 }
 
