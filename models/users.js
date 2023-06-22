@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const passportLocalMongoose = require('passport-local-mongoose');
+const bcrypt = require('bcryptjs');
 
 const userSchema = mongoose.Schema({
     name:{
@@ -13,13 +13,14 @@ const userSchema = mongoose.Schema({
 
     password:{
         type:String,
-        //hides password
-        select:false
     },
 
-    token:{
-        type:String
-    },
+    tokens:[{
+        token:{
+            type:String,
+        }
+    }],
+
     resetPasswordToken:{
         type:String
     },
@@ -28,7 +29,34 @@ const userSchema = mongoose.Schema({
     }
 });
 
-userSchema.plugin(passportLocalMongoose, {usernameField:'email'});
+userSchema.pre('save',async function(next){
+
+    const user = this;
+
+    if(user.isModified('password')){
+        user.password = await bcrypt.hash(user.password, 8);
+    }
+
+    next();
+});
+
+userSchema.statics.findByCredentials = async(email, password)=>{
+    
+    const user = await Users.findOne({email:email});
+
+    if(!user){
+        console.log('user: ', user);
+        throw new Error('unable to login: user issue');
+    }
+
+    const isMatched = await bcrypt.compare(password, user.password);
+
+    if(!isMatched){
+        throw new Error('unable ot login: Password Issue')
+    }
+
+    return user;
+}
 
 const Users = mongoose.model('users', userSchema);
 
