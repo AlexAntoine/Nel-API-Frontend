@@ -1,11 +1,21 @@
-const passport = require('passport');
+const jwt = require('jsonwebtoken');
+const User = require('../models/users');
 
-exports.auth = (req, res, next)=>{
-    if(req.isAuthenticated()){
-        return next ();
+exports.auth = async(req, res, next)=>{
+  
+    token = req.cookies.token;
+    console.log('line 7: ', token);
+
+    const decoded = jwt.verify(token,'abcd');
+    console.log('decoded: ', decoded);
+
+    const user = await User.findById({email:decoded.email, 'tokens.token':token});
+
+    if(!user){
+        throw new Error('Something went wrong')
     }
-
-    req.flash('error_msg','Please Login First!');
-    res.redirect('/');
-
+    
+    req.token = token;
+    req.user = user;
+    next();
 }
