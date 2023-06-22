@@ -55,7 +55,7 @@ exports.getSingleUsersData = async(id, token)=>{
 exports.loginApi = async(req, email)=>{
    
     const userData = {
-        email:req.user.email,
+        email:req.body.email,
         role:'user'
     }
 
