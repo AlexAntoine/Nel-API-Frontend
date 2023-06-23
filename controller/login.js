@@ -18,8 +18,8 @@ exports.userLogin = async(req, res, next)=>{
 
     user.tokens = user.tokens.concat({token});
     res.cookie('token',token,{
-        httpOnly: true
-    })
+        httpOnly:true
+    });
 
     const result = await user.save();
     // console.log('result: ',result);
@@ -28,14 +28,16 @@ exports.userLogin = async(req, res, next)=>{
 
 exports.logOut = async(req, res, next)=>{
 
-    req.logout((err)=>{
-        if(err){
-            return next(err);
-        }
-        
-        req.flash('success_msg', 'You have been logged out');
-        res.redirect('/')
+    req.user.tokens = req.user.tokens.filter((token)=>{
+
+        return token.token !== req.token;
     });
+
+    await req.user.save();
+
+    res.clearCookie("token");
+
+    res.redirect('/');
    
 }
 
