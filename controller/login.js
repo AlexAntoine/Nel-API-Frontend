@@ -14,13 +14,15 @@ exports.userLogin = async(req, res, next)=>{
     // console.log(req);
     // console.log('user: ',user);
     const token = await loginApi(req);
-    console.log('token: ',token);
+    // console.log('token: ',token);
 
     user.tokens = user.tokens.concat({token});
-    res.cookie('token',token)
+    res.cookie('token',token,{
+        httpOnly: true
+    })
 
     const result = await user.save();
-    console.log('result: ',result);
+    // console.log('result: ',result);
     res.redirect('/users');
 }
 
