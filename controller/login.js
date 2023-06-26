@@ -28,16 +28,19 @@ exports.userLogin = async(req, res, next)=>{
 
 exports.logOut = async(req, res, next)=>{
 
-    req.user.tokens = req.user.tokens.filter((token)=>{
+     res.clearCookie('token');
 
-        return token.token !== req.token;
-    });
+     res.redirect('/');
+    // req.user.tokens = req.user.tokens.filter((token)=>{
 
-    await req.user.save();
+    //     return token.token !== req.token;
+    // });
 
-    res.clearCookie("token");
+    // await req.user.save();
 
-    res.redirect('/');
+    // res.clearCookie("token");
+
+    // res.redirect('/');
    
 }
 
