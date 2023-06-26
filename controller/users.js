@@ -67,7 +67,7 @@ exports.updateUser = async(req, res)=>{
 
         console.log(error);
 
-        req.flash('errro_msg', 'Unable to update user');
+        req.flash('error_msg', 'Unable to update user');
         res.redirect('/users');
     }
 }
