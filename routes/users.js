@@ -6,5 +6,5 @@ const {getUsersPage, getNewUserPage, getUserEditPage, updateUser, addNewUser, de
 router.route('/users').get(auth,getUsersPage);
 router.route('/edit/users/:id').get(auth,getUserEditPage).put(auth,updateUser);
 router.route('/add/users').get(auth, getNewUserPage).post(auth, addNewUser);
-router.route('/delete/:id').post(auth, deleteUser);
+router.route('/users/delete/:id').post(auth, deleteUser);
 module.exports = router;
