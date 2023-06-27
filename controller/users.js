@@ -26,21 +26,27 @@ exports.getUserEditPage = async(req, res)=>{
 
 exports.getUsersPage = async(req, res)=>{
 
-    try{
-        const data = await getUsersData(req.cookies.token);
-
-        if(!data){
-            
-            throw new Error('Unable to retrieve data')
+    if(!req.cookies.token){
+        console.log('Hello World');
+        try{
+            const data = await getUsersData(req.cookies.token);
+    
+            if(!data){
+                
+                throw new Error('Unable to retrieve data')
+            }
+            res.render('users', {users:data});
+    
+        }catch(error){
+    
+            console.log(error);
+            req.flash('error_msg', `${error.message}`)
+            res.render('users', {users:[]});
         }
-        res.render('users', {users:data});
-
-    }catch(error){
-
-        console.log(error);
-
-        res.render('users', {users:[]});
     }
+    const data = await getUsersData(req.cookies.token);
+
+    res.render('users', {users: data})
 }
 
 exports.updateUser = async(req, res)=>{
