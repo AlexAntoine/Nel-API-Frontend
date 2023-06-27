@@ -29,18 +29,9 @@ exports.userLogin = async(req, res, next)=>{
 exports.logOut = async(req, res, next)=>{
 
      res.clearCookie('token');
+     req.session = null;
 
      res.redirect('/');
-    // req.user.tokens = req.user.tokens.filter((token)=>{
-
-    //     return token.token !== req.token;
-    // });
-
-    // await req.user.save();
-
-    // res.clearCookie("token");
-
-    // res.redirect('/');
    
 }
 
