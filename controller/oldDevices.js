@@ -2,14 +2,14 @@ const axios = require('axios');
 
 exports.getOldDevicesPage = async(req, res)=>{
     
-    const {data} = await axios.get('https://nel-api.herokuapp.com/api/old');
+    // const {data} = await axios.get('https://nel-api.herokuapp.com/api/old');
 
-    res.render('old',{devices:data.data})
+    // res.render('old',{devices:data.data})
     
 }
 
 exports.getOldDevicesEditPage = async(req, res)=>{
-   getOldDeviceData(req.token);
+//    getOldDeviceData(req.token);
     
 //    const {id} = req.params;
     
@@ -24,61 +24,49 @@ exports.getAddPage = async(req,res)=>{
 
 exports.updateOldDevice = async(req, res)=>{
     
-    const {ComputerName,Manufacturer,SerialNumber,ModelNumber,Age,CurrentYear, AssignedTo,ShipDate,notes} = req.body;
+    // const {ComputerName,Manufacturer,SerialNumber,ModelNumber,Age,CurrentYear, AssignedTo,ShipDate,notes} = req.body;
 
-    const data = {
-        ComputerName: ComputerName,
-        Manufacturer: Manufacturer,
-        SerialNumber:SerialNumber,
-        ModelNumber:ModelNumber,
-        Age:Age,
-        CurrentYear:CurrentYear,
-        ShipDate:ShipDate,
-        notes:notes ,
-        assignedTo:AssignedTo, 
-    }
+    // const data = {
+    //     ComputerName: ComputerName,
+    //     Manufacturer: Manufacturer,
+    //     SerialNumber:SerialNumber,
+    //     ModelNumber:ModelNumber,
+    //     Age:Age,
+    //     CurrentYear:CurrentYear,
+    //     ShipDate:ShipDate,
+    //     notes:notes ,
+    //     assignedTo:AssignedTo, 
+    // }
 
-    await axios.put(`https://nel-api.herokuapp.com/api/old/${req.params.id}`, data);
+    // await axios.put(`https://nel-api.herokuapp.com/api/old/${req.params.id}`, data);
    
-    res.redirect('/old')
+    // res.redirect('/old')
 }
 
 exports.addNewDevice = async(req, res)=>{
-    const {ComputerName,Manufacturer,SerialNumber,ModelNumber,Age,CurrentYear,ShipDate, AssignedTo,Notes} = req.body;
+    // const {ComputerName,Manufacturer,SerialNumber,ModelNumber,Age,CurrentYear,ShipDate, AssignedTo,Notes} = req.body;
     
-    const data ={
-        ComputerName: ComputerName,
-        Manufacturer: Manufacturer,
-        SerialNumber:SerialNumber,
-        ModelNumber:ModelNumber,
-        Age:Age,
-        CurrentYear:CurrentYear,
-        ShipDate:ShipDate,
-        assignedTo:AssignedTo,
-        notes:Notes  
-    }
+    // const data ={
+    //     ComputerName: ComputerName,
+    //     Manufacturer: Manufacturer,
+    //     SerialNumber:SerialNumber,
+    //     ModelNumber:ModelNumber,
+    //     Age:Age,
+    //     CurrentYear:CurrentYear,
+    //     ShipDate:ShipDate,
+    //     assignedTo:AssignedTo,
+    //     notes:Notes  
+    // }
 
-    await axios.post(`https://nel-api.herokuapp.com/api/old`, data);
+    // await axios.post(`https://nel-api.herokuapp.com/api/old`, data);
 
-    res.redirect('/old')
+    // res.redirect('/old')
 
 }
 
 exports.deleteDevice = async(req, res)=>{
 
-    const result = await axios.delete(`https://nel-api.herokuapp.com/api/old/${req.params.id}`);
+    // const result = await axios.delete(`https://nel-api.herokuapp.com/api/old/${req.params.id}`);
 
-    res.redirect('/old');
-}
-
-const getOldDeviceData = async(token)=>{
-
-    const data  = await axios.get(`https://nel-api.herokuapp.com/api/old`, {
-        headers:{
-            'Authorization': `Bearer ${token}`
-        }
-    });
-
-    return console.log(data);
-
+    // res.redirect('/old');
 }
