@@ -1,18 +1,51 @@
 const axios = require('axios');
+const {getCurrentDevices, addNewDevice, updateCurrentDevice, getSingleCurrentDevice, deleteDevice} = require('../utils/currentDeviceCalls');
 
 // Get
 exports.getCurrentDevicePage = async(req, res)=>{
 
-    const {data} = await axios.get('https://nel-api.herokuapp.com/api/current');
+    try{
+        const {token} = req.cookies;
+
+        const data = await getCurrentDevices(token);
+
+        if(!data){
+            throw new Error('No data to display')
+        }
     
-    res.render('currentDevices', {devices:data.data})
+        res.render('currentDevices',{devices:data});
+
+    }catch(error){
+        console.log(error);
+
+        req.flash('error_msg', `${error.message}`);
+
+        res.render('currentDevices',{devices:''});
+    }
+    
 }
 
 exports.getCurrentDeviceEditPage = async (req, res)=>{
    
-    const {data} = await axios.get(`https://nel-api.herokuapp.com/api/current/${req.params.id}`);
-    
-    res.render('editCurrentDevice',{devices:data.device});
+    const {token} = req.cookies;
+
+    try{    
+        
+        const data = await getSingleCurrentDevice(req.params.id,token);
+
+        if(!data){
+            throw new Error('Unable to retrive data')
+        }
+       
+        res.render('editCurrentDevice', {devices:data})
+
+    }catch(error){
+        console.log(error);
+
+        req.flash('error_msg', `${error.message}`);
+
+        res.redirect('/current');
+    }
 }
 
 exports.getAddCurrentDevicePage = async (req, res)=>{
@@ -23,6 +56,8 @@ exports.getAddCurrentDevicePage = async (req, res)=>{
 exports.updateCurrentDevice = async (req, res)=>{
    
    const {ComputerName,Manufacturer,SerialNumber,ModelNumber,Age,CurrentYear,ShipDate,AssignedTo,Notes} = req.body;
+   const {id}= req.params;
+   const {token} = req.cookies;
 
    const data = {
       ComputerName: ComputerName,
@@ -36,57 +71,76 @@ exports.updateCurrentDevice = async (req, res)=>{
       notes:Notes
    }
 
-    await axios.put(`https://nel-api.herokuapp.com/api/current/${req.params.id}`,data);
-    
-    res.redirect('/current');
+   try {
+        const result = await updateCurrentDevice(id, data, token);
+
+        console.log('line 77: ', result);
+        
+        req.flash('success_msg', 'Device Successfully updated');
+
+        res.redirect('/current');
+
+   } catch (error) {
+
+     console.log(error);
+     
+     req.flash('error_msg', 'Unable to update device');
+
+     res.redirect('/current');
+   }
 }
 
 
 //POST
 exports.addCurrentDevice = async(req, res)=>{
 
-    // console.log(req.body);
-    // const {ComputerName,Manufacturer,SerialNumber,ModelNumber,OsVersion,ChassisTypesRaw,Age,CurrentYear,CompId,ReplacementCost,shouldRetire,Type,assignedTo,oldEnough,ChassisType,ChassisSubType,ShipDate,notes,LastLogin,GetLastDeviceLogin} = req.body;
-    // const data ={
-    //     ComputerName,
-    //     Manufacturer,
-    //     SerialNumber,
-    //     ModelNumber,
-    //     OsVersion,
-    //     ChassisTypesRaw,
-    //     ShipDate,
-    //     Age,
-    //     CurrentYear,
-    //     CompId,
-    //     ReplacementCost,
-    //     Type,
-    //     assignedTo,
-    //     shouldRetire,
-    //     oldEnough,
-    //     ChassisSubType,
-    //     ChassisType,
-    //     notes,
-    //     LastLogin,
-    //     GetLastDeviceLogin
-    // }
+    const data = {
+        ...req.body
+    }
 
-    // const data = {
-    //     ...req.body
-    // }
-
-
+    try {
     
-    // const result = await axios.post(`https://nel-api.herokuapp.com/api/current`,data);
-    // console.log(result);
+        const result = await addNewDevice(data, req.cookies.token);
 
-    // res.redirect('/current');
+        if(!result.success){
+            throw new Error('Unable to save new device')
+        }
+
+        req.flash('success_msg', 'New device saved successfully!');
+
+        res.redirect('/current');
+
+    } catch (error) {
+        console.log(error);
+
+        req.flash('error_msg',`${error.message}`);
+
+        res.redirect('/add/current')
+    }
 }
 
 // Delete
 exports.deleteCurrentDevice = async(req, res)=>{
 
-    console.log('Hello World');
-    console.log(req.params);
-    console.log(req.body);
+    const {id} = req.params;
+
+    try {
+        const data = await deleteDevice(id, req.cookies.token);
+
+        if(!data.success){
+            throw new Error('Unable to delete device')
+        }
+
+        req.flash('success_msg',"Device deleted successfully");
+
+        res.redirect('/current');
+
+    } catch (error) {
+        console.log(error);
+
+        req.flash('error_msg', `${error.message}`);
+
+        res.redirect('/current');
+    }
 }
 
