@@ -74,7 +74,9 @@ exports.updateCurrentDevice = async (req, res)=>{
    try {
         const result = await updateCurrentDevice(id, data, token);
 
-        console.log('line 77: ', result);
+        if(!result){
+            throw new Error('Unable to update device')
+        }
         
         req.flash('success_msg', 'Device Successfully updated');
 
@@ -84,7 +86,7 @@ exports.updateCurrentDevice = async (req, res)=>{
 
      console.log(error);
      
-     req.flash('error_msg', 'Unable to update device');
+     req.flash('error_msg', `${error.message}`);
 
      res.redirect('/current');
    }
