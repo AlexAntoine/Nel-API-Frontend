@@ -1,59 +1,134 @@
-const axios = require('axios');
+const {getDeviceAgeData,addNewDevice, deleteDeviceAgeData, getSingleDeviceage} = require('../utils/deviceAgeCalls');
 
 exports.getDeviceAgePage = async(req, res)=>{
     
-    // const devices = await axios.get('https://nel-api.herokuapp.com/api/deviceage');
-    
-    // res.render('deviceage', {devices:devices.data.data});
+    try {
+        const {token} = req.cookies;
+
+        const result = await getDeviceAgeData(token);
+
+        if(!result){
+            throw new Error('Unable to retrieve data');
+        }
+        
+        res.render('deviceage', {devices:result});
+
+    } catch (error) {
+        
+        console.log(error);
+        
+        req.flash('error_msg', `${error.message}`);
+       res.rediret('/users');
+    }
 
 }
 
 exports.getDeviceAgeEditPage = async(req,res)=>{
 
-    // const {data} = await axios.get(`https://nel-api.herokuapp.com/api/deviceage/${req.params.id}`);
+    try {
+        const {id} = req.params;
+        const {token} = req.cookies;
 
-    // res.render('editDeviceAge',{devices:data.data})
+        const result = await getSingleDeviceage(id,token);
+
+        if(!result){
+            throw new Error('Unable to retrieve data');
+        }
+        
+        res.render('editDeviceAge', {devices:result});
+
+    } catch (error) {
+        
+        console.log(error);
+        
+        req.flash('error_msg', `${error.message}`);
+        res.redirect('/deviceage');
+    }
+
 }
 
 exports.updateDeviceAge = async(req, res)=>{
-    // const {devicename,shipdate} = req.body;
-
-    // const data =  {
-    //     DeviceName:devicename,
-    //     ShipDate:shipdate
-
-    // }
+    const {devicename,shipdate} = req.body;
+    const {id} = req.params;
+    const data =  {
+        DeviceName:devicename,
+        ShipDate:shipdate
+    }
    
-    // await axios.put(`https://nel-api.herokuapp.com/api/deviceage/${req.params.id}`, data);
+   try {
+      
+      const result = await updateDeviceAge(id,data,req.cookies.token);
+
+      if(!result){
+        throw new Error('Unable to update device');
+      }
+
+      req.flash('success_msg', 'Device successfully updated');
+
+      res.redirect('/devicage');
+
+   } catch (error) {
     
-    // res.redirect('/deviceage')
+        console.log(error);
+
+        req.flash('error_msg',`${error.message}`);
+
+        res.redirect('/devicage');
+   }
 }
 
-exports.addDevicePage =(req, res)=>{
+exports.getAddDevicePage =(req, res)=>{
     
-    // res.render('addDeviceAge')
+    res.render('addDeviceAge')
 }
 
 exports.addNewDeviceAge = async(req, res)=>{
-//    const {devicename,shipdate} = req.body;
+   const {devicename,shipdate} = req.body;
 
-//    const data = {
-//         DeviceName:devicename,
-//         ShipDate:shipdate
-//    }
-
-  
-//     await axios.post(`https://nel-api.herokuapp.com/api/deviceage`, data);
-    
-//     res.redirect('/deviceage');
-
-  
+   const data = {
+        DeviceName:devicename,
+        ShipDate:shipdate
+   }
    
+   try {
+        const result = await addNewDevice(data, req.cookies.token);
+        
+        if(!result){
+
+            throw new Error('Unable to add device');
+        }
+
+        req.flash('success_msg', 'Device added successfully');
+
+        res.redirect('/deviceage');
+
+   } catch (error) {
+
+     console.log(error);
+
+     req.flash('error_msg',`${error.message}`);
+
+     res.redirect('/add/deviceage');
+   }
 }
 
 exports.deleteDevice = async(req, res)=>{
 
-    // const result = await axios.delete(`https://nel-api.herokuapp.com/api/deviceage/${req.params.id}`);   
-    
-    // res.redirect('/deviceage');
+    try {
+        const {token} = req.cookies;
+        const {id} = req.params;
+
+        const result = await deleteDeviceAgeData(id, token);
+        
+        req.flash('success_msg', 'Device was successfully deleted');
+
+        res.redirect('/deviceage');
+
+    } catch (error) {
+        console.log(error);
+
+        req.flash('error_msg','unable to delete device');
+
+        res.redirect('/deviceage');
+    }
 }
