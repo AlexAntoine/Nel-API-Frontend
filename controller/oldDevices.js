@@ -1,21 +1,41 @@
-const axios = require('axios');
+const {addOldDevice, updateOldDeviceData, getOldDeviceData, getSingleOldDevice, deleteOldDeviceData} = require('../utils/oldDeviceCalls');
 
 exports.getOldDevicesPage = async(req, res)=>{
     
-    const {data} = await axios.get('https://nel-api.herokuapp.com/api/old');
-
-    res.render('old',{devices:data.data})
+    try {
+        const results = await getOldDeviceData(token);
     
+        res.render('old', {devices:results});
+
+    } catch (error) {
+
+        console.log(error);
+
+        req.flash('error_msg', 'Unable to retrieve page');
+        res.redirect('/users');
+    }
 }
 
 exports.getOldDevicesEditPage = async(req, res)=>{
-   getOldDeviceData(req.token);
-    
-//    const {id} = req.params;
-    
-//    const {data} =  await axios.get(`https://nel-api.herokuapp.com/api/old/${id}`);
-//    res.render('editOldDevice', {devices:data.data});
-    
+
+    try {
+        const {token} = req.cookies;
+        const {id} = req.params;
+
+        const results = await getSingleOldDevice(id, token);
+        console.log('line 26: ',results);
+
+        req.flash('success_msg', 'Device successfully updated');
+
+        res.render('editOldDevice', {devices:results});
+
+    } catch (error) {
+
+        console.log(error);
+
+        req.flash('error_msg', 'Unable to retrieve page');
+        res.redirect('/old');
+    }
 }
 
 exports.getAddPage = async(req,res)=>{
@@ -23,10 +43,11 @@ exports.getAddPage = async(req,res)=>{
 }
 
 exports.updateOldDevice = async(req, res)=>{
-    
-    const {ComputerName,Manufacturer,SerialNumber,ModelNumber,Age,CurrentYear, AssignedTo,ShipDate,notes} = req.body;
 
-    const data = {
+    const {ComputerName,Manufacturer,SerialNumber,ModelNumber,Age,CurrentYear,ShipDate, AssignedTo,notes} = req.body;
+    console.log(req.body);
+    
+    const data ={
         ComputerName: ComputerName,
         Manufacturer: Manufacturer,
         SerialNumber:SerialNumber,
@@ -34,16 +55,36 @@ exports.updateOldDevice = async(req, res)=>{
         Age:Age,
         CurrentYear:CurrentYear,
         ShipDate:ShipDate,
-        notes:notes ,
-        assignedTo:AssignedTo, 
+        assignedTo:AssignedTo,
+        notes:notes  
+    }
+    const {token} = req.cookies;
+    const {id} = req.params;
+  
+    try {
+       
+
+        const results = await updateOldDeviceData(id, data, token);
+        // console.log(results);
+
+        req.flash('success_msg', 'Device successfully updated');
+
+        res.redirect('/old');
+
+    } catch (error) {
+
+        console.log(error);
+
+        req.flash('error_msg', 'Unable to update device');
+        res.redirect('/old');
     }
 
-    await axios.put(`https://nel-api.herokuapp.com/api/old/${req.params.id}`, data);
-   
-    res.redirect('/old')
 }
 
+
+
 exports.addNewDevice = async(req, res)=>{
+
     const {ComputerName,Manufacturer,SerialNumber,ModelNumber,Age,CurrentYear,ShipDate, AssignedTo,Notes} = req.body;
     
     const data ={
@@ -57,28 +98,45 @@ exports.addNewDevice = async(req, res)=>{
         assignedTo:AssignedTo,
         notes:Notes  
     }
+    const {token} = req.cookies;
+  
+    try {
+       
 
-    await axios.post(`https://nel-api.herokuapp.com/api/old`, data);
+        const results = await addOldDevice(data, token);
+        console.log(results);
 
-    res.redirect('/old')
+        req.flash('success_msg', 'Device successfully added');
+
+        res.redirect('/old');
+
+    } catch (error) {
+
+        console.log(error);
+
+        req.flash('error_msg', 'Unable to add device');
+        res.redirect('/old');
+    }
 
 }
 
 exports.deleteDevice = async(req, res)=>{
 
-    const result = await axios.delete(`https://nel-api.herokuapp.com/api/old/${req.params.id}`);
+    try {
+        
+        const result = await deleteOldDeviceData(req.params.id, req.cookies.token);
+        // console.log(result);
 
-    res.redirect('/old');
-}
+        req.flash('success_msg','Device successfully deleted');
 
-const getOldDeviceData = async(token)=>{
+        res.redirect('/old');
 
-    const data  = await axios.get(`https://nel-api.herokuapp.com/api/old`, {
-        headers:{
-            'Authorization': `Bearer ${token}`
-        }
-    });
+    } catch (error) {
 
-    return console.log(data);
+        console.log(error);
 
+        req.flash('error_msg', 'Unable to delete device');
+
+        res.redirect('/deviceage');
+    }
 }

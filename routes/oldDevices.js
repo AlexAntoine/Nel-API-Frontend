@@ -7,6 +7,6 @@ const {getOldDevicesPage,getOldDevicesEditPage, getAddPage, updateOldDevice, add
 router.route('/old').get(auth, getOldDevicesPage);
 router.route('/edit/old/:id').get(auth, getOldDevicesEditPage).put(updateOldDevice);
 router.route('/add/old').get(auth, getAddPage).post(addNewDevice);
-router.route('/delete/:id').post(auth,deleteDevice)
+router.route('/old/delete/:id').post(auth,deleteDevice)
 
 module.exports = router;

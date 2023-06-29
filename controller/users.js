@@ -6,54 +6,47 @@ exports.getNewUserPage = async(req, res)=>{
 }
 
 exports.getUserEditPage = async(req, res)=>{
+        // console.log(req.cookies.token);
+    try{
+        const data = await getSingleUsersData(req.params.id,req.cookies.token);
+        
+        if(!data){
+            throw new Error('Unable to retireve data')
+        }
+        res.render('editUser',{user:data});
 
-    console.log(req);
-    // try{
-    //     const data = await getSingleUsersData(req.params.id, res.session.token);
-        
-    //     res.render('editUser',{user:''});
+    }catch(error){
 
-    // }catch(error){
-
-    //     console.log(error);
+        console.log(error);
         
-    //     res.redirect('/users');
-    // }
-    // try {
-        
-    //     console.log(req.session.cookie.token);
-    //     const data = await getSingleUsersData(req.params.id, req.session.cookie.token)
-        
-    //     res.render('editUser',{user:''});
-        
-    // } catch (error) {
-    //     console.log(error);
-        
-    //     res.redirect('/users');
-
-    // }
+        res.redirect('/users');
+    }
+    
 }
 
 exports.getUsersPage = async(req, res)=>{
-    // console.log(req);
-    // if(!req.session.cookie.token){
-    //     console.log('Hello 1');
-    //     const token = await loginApi(req);
-    //     req.session.cookie.token = token;
-        
-    //     const data  = await getUsersData(token);
+
+    if(!req.cookies.token){
+        console.log('Hello World');
+        try{
+            const data = await getUsersData(req.cookies.token);
     
-    //     res.render('users',{users:data})
-    // }
+            if(!data){
+                
+                throw new Error('Unable to retrieve data')
+            }
+            res.render('users', {users:data});
+    
+        }catch(error){
+    
+            console.log(error);
+            req.flash('error_msg', `${error.message}`)
+            res.render('users', {users:[]});
+        }
+    }
+    const data = await getUsersData(req.cookies.token);
 
-    const token =await loginApi(req);
-    req.session.token = token;
-
-    console.log('line 54: ',req);
-
-    const data  = await getUsersData(token); 
-    res.render('users',{users:data})   
-   
+    res.render('users', {users: data})
 }
 
 exports.updateUser = async(req, res)=>{
@@ -72,7 +65,7 @@ exports.updateUser = async(req, res)=>{
             Office:office
         };
 
-        const result = await updateAUser(id, data, req.session.token)
+        const result = await updateAUser(id, data, req.cookies.token)
         // console.log(result);
         res.redirect('/users')
 
@@ -80,11 +73,12 @@ exports.updateUser = async(req, res)=>{
 
         console.log(error);
 
-        req.flash('errro_msg', 'Unable to update user');
+        req.flash('error_msg', 'Unable to update user');
         res.redirect('/users');
     }
 }
 
+// POST 
 exports.addNewUser = async(req,res)=>{
     try {
 
@@ -99,7 +93,7 @@ exports.addNewUser = async(req,res)=>{
             Office:office
         }
 
-        await addUser(newUserData, req.session.token);
+        await addUser(newUserData, req.cookies.token);
 
         req.flash('success_msg', 'New User Added!');
         
@@ -118,7 +112,7 @@ exports.addNewUser = async(req,res)=>{
 exports.deleteUser = async(req, res)=>{
 
     try{
-        await removeUser(req.params.id,req.session.token);
+        await removeUser(req.params.id,req.cookies.token);
         
         req.flash('success_msg',`User was successfully Deleted`);
 

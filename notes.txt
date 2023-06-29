@@ -29,3 +29,5 @@ Try working with axiosInstance - https://www.youtube.com/watch?v=j22XDQkdMfw&ab_
 Header refreshes with every request which makes it difficult to save a tokent to the header
 or the use. User information is not saved with every request hence why I need to login ever time.
 Look at task manager project for more ideas. 
+
+Go back to Andrews course section 12 video 111 for logging out function.

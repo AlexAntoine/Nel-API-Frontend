@@ -1,9 +1,6 @@
 require('dotenv').config({path:'./.env'});
 const express = require('express');
 const colors = require('colors');
-const passport = require('passport')
-const localStrategy = require('passport-local').Strategy;
-const session = require('express-session');
 const cookieSession = require('cookie-session'); 
 const cookieParser = require('cookie-parser')   
 const flash = require('connect-flash');
@@ -30,25 +27,15 @@ const oldRoute = require('./routes/oldDevices');
 const deviceAge= require('./routes/deviceAge');
 const currentdevice = require('./routes/currentDevices');
 
-const User = require('./models/users')
-
 localDb();
 
-// app.use(cookieSession({
-//     maxAge:24*60*60*1000,
-//     keys:['abcd']
-// }))
-app.use(session({secret:'abcd', resave:true, saveUninitialized:true}));
+app.use(cookieParser());
+app.use(cookieSession({
+    maxAge: 24 * 60 * 60 * 1000,
+    keys:['abcd']
+}));
 app.use(flash())
 app.use(methodOverride('_method'));
-
-app.use(passport.initialize());
-// app.use(cookieParser())
-
-app.use(passport.session());
-passport.use(new localStrategy({usernameField:'email'},User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res,next)=>{
     res.locals.success_msg = req.flash(('success_msg'));
@@ -67,6 +54,7 @@ app.use(userRoute);
 app.use(deviceAge);
 app.use(oldRoute);
 app.use(currentdevice);
+
 
 
 module.exports = app;
