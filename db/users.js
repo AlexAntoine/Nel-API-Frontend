@@ -7,6 +7,14 @@ const localDb = async()=>{
     console.log('Database Connected'.cyan.underline.bold);
 }
 
+const prodDb = async()=>{
+    mongoose.set('strictQuery', true);
+    
+    const db = mongoose.connect(process.env.PRODUCTION,{useNewUrlParser:true, useUnifiedTopology: true});
+    console.log('Database Connected'.cyan.underline.bold);
+}
+
 module.exports =  {
-    localDb
+    localDb,
+    prodDb
 };
