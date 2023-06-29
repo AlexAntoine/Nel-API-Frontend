@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser')
 const flash = require('connect-flash');
 const methodOverride = require('method-override');
 const { urlencoded } = require('body-parser');
-const {localDb} = require('./db/users');
+const {localDb,prodDb} = require('./db/users');
 const path = require('path');
 
 const app = express();
@@ -27,7 +27,7 @@ const oldRoute = require('./routes/oldDevices');
 const deviceAge= require('./routes/deviceAge');
 const currentdevice = require('./routes/currentDevices');
 
-localDb();
+prodDb();
 
 app.use(cookieParser());
 app.use(cookieSession({
