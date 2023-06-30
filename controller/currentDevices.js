@@ -5,7 +5,7 @@ const {getCurrentDevices, addNewDevice, updateCurrentDevice, getSingleCurrentDev
 exports.getCurrentDevicePage = async(req, res)=>{
     try{
         const {token} = req.cookies;
-        console.log(token);
+       
         const data = await getCurrentDevices(token);
         // console.log(data);
 

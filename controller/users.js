@@ -27,7 +27,7 @@ exports.getUserEditPage = async(req, res)=>{
 exports.getUsersPage = async(req, res)=>{
 
     if(!req.cookies.token){
-        console.log('Hello World');
+        
         try{
             const data = await getUsersData(req.cookies.token);
     
