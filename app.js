@@ -11,7 +11,7 @@ const path = require('path');
 
 const app = express();
 
-app.set('views', path.join(__dirname, '../templates/views'));
+app.set('views', path.join(__dirname, '/templates/views'));
 app.set('view engine','ejs');
 
 app.use(urlencoded({extended:true}))
