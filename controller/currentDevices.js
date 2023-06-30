@@ -13,7 +13,7 @@ exports.getCurrentDevicePage = async(req, res)=>{
             throw new Error('No data to display')
         }
     
-        res.render('currentDevices',{devices:data});
+        res.render('currentDevices',{devices:[]});
 
     }catch(error){
         console.log(error);
