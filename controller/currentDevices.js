@@ -20,7 +20,7 @@ exports.getCurrentDevicePage = async(req, res)=>{
 
         req.flash('error_msg', `${error.message}`);
 
-        res.render('currentDevices',{devices:''});
+        res.render('currentDevices',{devices:[]});
     }
     
 }
