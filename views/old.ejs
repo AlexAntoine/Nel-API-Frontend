@@ -1,4 +1,4 @@
-<%- include('/partials/deviceage') -%>
+<%- include('partials/old') -%>
 
     <div class="container mt-5">
         <%- include('partials/messages') -%>
@@ -7,38 +7,48 @@
 
                 <thead>
                     <tr>
-                        <th>Device Name</th>
+                        <th>Computer Name</th>
+                        <th>Model Number</th>
                         <th>Ship Date</th>
+                        <th>Age</th>
+                        <th>Serial Number</th>
                         <th>Operations</th>
                     </tr>
                 </thead>
 
                 <tfoot>
                     <tr>
-                        <th>Device Name</th>
+                        <th>Computer Name</th>
+                        <th>Model Number</th>
                         <th>Ship Date</th>
+                        <th>Age</th>
+                        <th>Serial Number</th>
+                        
                         <th>Operations</th>
                     </tr>
                 </tfoot>
 
                 <tbody>
-                                          
-                
                     <% devices.forEach((device)=>{ %>
 
+                    
                     <tr>
-                        <td><%= device.DeviceName%></td>
+                        <td><%= device.ComputerName%></td>
+                        <td><%= device.ModelNumber%></td>
                         <td><%= device.ShipDate%></td>
+                        <td><%= device.Age %></td>
+                        <td><%= device.SerialNumber%></td>
+                        
                         <td>
-                            <a href="edit/deviceage/<%= device._id%>" class="btn btn-primary">Edit</a>
-                            <form style="display: inline;" action="/delete/<%=device._id%>" method="POST">
+                            <a href="edit/old/<%=device._id%>" class="btn btn-primary">Edit</a>
+                            <form style="display: inline;" action="/old/delete/<%=device._id%>" method="POST">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <button style="cursor:pointer" type="submit" class="btn btn-danger ml-2">Delete</button>
                             </form>
                         </td>
                     </tr>
-
                     <%})%>
+                    
                 </tbody>
 
             </table>
