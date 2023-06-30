@@ -46,7 +46,7 @@ app.use((req, res,next)=>{
     next();
 });
 
-app.use('/',homeRouter);
+app.use(homeRouter);
 app.use(changePasswordRouter)
 app.use(forgetPasswordRouter);
 app.use(signupRouter);
