@@ -3,12 +3,11 @@ const {getCurrentDevices, addNewDevice, updateCurrentDevice, getSingleCurrentDev
 
 // Get
 exports.getCurrentDevicePage = async(req, res)=>{
-    console.log('hello');
     try{
         const {token} = req.cookies;
         console.log(token);
         const data = await getCurrentDevices(token);
-        console.log(data);
+        // console.log(data);
 
         if(!data){
             throw new Error('No data to display')
