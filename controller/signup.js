@@ -12,7 +12,7 @@ exports.sendNewUser = async(req, res)=>{
 
         const newUser = await User.create(req.body);
 
-        if(newUser.email){
+        if(!newUser){
             throw new Error('Unable to register User');
         }
 
