@@ -13,7 +13,7 @@ exports.sendNewUser = async(req, res)=>{
         const newUser = await User.create(req.body);
 
         if(newUser.email){
-            throw new Error('This is an existing user. Please login');
+            throw new Error('Unable to register User');
         }
 
         const token = await loginApi(req);
@@ -40,10 +40,6 @@ exports.sendNewUser = async(req, res)=>{
         
         console.log('signup error: ', error);
 
-        if(error.code === 11000){
-            throw new Error(`This is an existing user. Please login`)
-            
-        }
         req.flash('error_msg', `${error.message}`)
 
         res.redirect('/signup');
