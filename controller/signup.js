@@ -8,19 +8,41 @@ exports.getSignupPage = async(req, res)=>{
 
 exports.sendNewUser = async(req, res)=>{
    
-    const newUser = await User.create(req.body);
+    try {
 
-    const token = await loginApi(req);
-    // console.log('line 13 Token: ', token);
+        const newUser = await User.create(req.body);
 
-    newUser.tokens = newUser.tokens.concat({token})
+        if(newUser.email){
+            throw new Error('This is an existing user. Please login');
+        }
 
-    const result = await newUser.save();
-    // console.log('line 19 result: ',result);
+        const token = await loginApi(req);
 
-    res.cookie('token',token,{
-        httpOnly:true
-    });
+        if(!token){
+            throw new Error('Unable to register User');
+        }
 
-    res.redirect('/users')
+        newUser.tokens = newUser.tokens.concat({token})
+
+        const result = await newUser.save();
+
+        if(!result){
+            throw new Error('Unable to register User');
+        }
+
+        res.cookie('token',token,{
+            httpOnly:true
+        });
+
+        res.redirect('/users')
+        
+    } catch (error) {
+        
+        console.log('signup error: ', error);
+        
+        req.flash('error_msg', `${error.message}`)
+
+        res.redirect('/signup');
+    }
+    
 }

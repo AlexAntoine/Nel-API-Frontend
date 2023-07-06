@@ -15,12 +15,9 @@ exports.userLogin = async(req, res, next)=>{
         if(!user){
             throw new Error();
         }
-        // console.log(user);
-        // console.log(req);
-        // console.log('user: ',user);
+ 
         const token = await loginApi(req);
-        // console.log('token: ',token);
-
+   
         if(!token){
             throw new Error()
         }
