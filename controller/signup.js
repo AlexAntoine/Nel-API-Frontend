@@ -39,7 +39,10 @@ exports.sendNewUser = async(req, res)=>{
     } catch (error) {
         
         console.log('signup error: ', error);
-        
+
+        if(error.code === 11000){
+            req.flash('error_msg', `This is an existing user. Please login`)
+        }
         req.flash('error_msg', `${error.message}`)
 
         res.redirect('/signup');
