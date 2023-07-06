@@ -12,23 +12,11 @@ exports.sendNewUser = async(req, res)=>{
 
         const newUser = await User.create(req.body);
 
-        if(!newUser){
-            throw new Error('Unable to register User');
-        }
-
         const token = await loginApi(req);
-
-        if(!token){
-            throw new Error('Unable to register User');
-        }
 
         newUser.tokens = newUser.tokens.concat({token})
 
         const result = await newUser.save();
-
-        if(!result){
-            throw new Error('Unable to register User');
-        }
 
         res.cookie('token',token,{
             httpOnly:true
@@ -40,7 +28,7 @@ exports.sendNewUser = async(req, res)=>{
         
         console.log('signup error: ', error);
 
-        req.flash('error_msg', `${error.message}`)
+        req.flash('error_msg', `Unable to register user`)
 
         res.redirect('/signup');
     }
