@@ -8,19 +8,29 @@ exports.getSignupPage = async(req, res)=>{
 
 exports.sendNewUser = async(req, res)=>{
    
-    const newUser = await User.create(req.body);
+    try {
 
-    const token = await loginApi(req);
-    // console.log('line 13 Token: ', token);
+        const newUser = await User.create(req.body);
 
-    newUser.tokens = newUser.tokens.concat({token})
+        const token = await loginApi(req);
 
-    const result = await newUser.save();
-    // console.log('line 19 result: ',result);
+        newUser.tokens = newUser.tokens.concat({token})
 
-    res.cookie('token',token,{
-        httpOnly:true
-    });
+        const result = await newUser.save();
 
-    res.redirect('/users')
+        res.cookie('token',token,{
+            httpOnly:true
+        });
+
+        res.redirect('/users')
+        
+    } catch (error) {
+        
+        console.log('signup error: ', error);
+
+        req.flash('error_msg', `Unable to register user`)
+
+        res.redirect('/signup');
+    }
+    
 }

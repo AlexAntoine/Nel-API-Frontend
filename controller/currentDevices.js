@@ -3,24 +3,24 @@ const {getCurrentDevices, addNewDevice, updateCurrentDevice, getSingleCurrentDev
 
 // Get
 exports.getCurrentDevicePage = async(req, res)=>{
-
     try{
         const {token} = req.cookies;
-
+       
         const data = await getCurrentDevices(token);
+        console.log(data);
 
         if(!data){
             throw new Error('No data to display')
         }
     
-        res.render('currentDevices',{devices:data});
+        res.render('current',{devices:data});
 
     }catch(error){
         console.log(error);
 
         req.flash('error_msg', `${error.message}`);
 
-        res.render('currentDevices',{devices:''});
+        res.render('current',{devices:[]});
     }
     
 }
@@ -32,7 +32,7 @@ exports.getCurrentDeviceEditPage = async (req, res)=>{
     try{    
         
         const data = await getSingleCurrentDevice(req.params.id,token);
-
+        // console.log('line 35: ', data);
         if(!data){
             throw new Error('Unable to retrive data')
         }
@@ -55,7 +55,7 @@ exports.getAddCurrentDevicePage = async (req, res)=>{
 // PUT
 exports.updateCurrentDevice = async (req, res)=>{
    
-   const {ComputerName,Manufacturer,SerialNumber,ModelNumber,Age,CurrentYear,ShipDate,AssignedTo,Notes} = req.body;
+   const {ComputerName,Manufacturer, ReplacementCost,SerialNumber,ModelNumber,Age,CurrentYear,ShipDate,assignedTo,Notes} = req.body;
    const {id}= req.params;
    const {token} = req.cookies;
 
@@ -63,17 +63,18 @@ exports.updateCurrentDevice = async (req, res)=>{
       ComputerName: ComputerName,
       Manufacturer: Manufacturer,
       SerialNumber:SerialNumber,
+      ReplacementCost:ReplacementCost,
       ModelNumber:ModelNumber,
       Age:Age,
       CurrentYear:CurrentYear,
       ShipDate:ShipDate,
-      assignTo:AssignedTo,
+      assignedTo:assignedTo,
       notes:Notes
    }
 
    try {
         const result = await updateCurrentDevice(id, data, token);
-
+        // console.log('line 76: ', result);
         if(!result){
             throw new Error('Unable to update device')
         }

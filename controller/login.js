@@ -8,22 +8,42 @@ exports.getLoginPage = async(req, res, next)=>{
 }
 
 exports.userLogin = async(req, res, next)=>{
-    const {email, password} = req.body;
-    const user = await User.findByCredentials(email, password);
-    // console.log(user);
-    // console.log(req);
-    // console.log('user: ',user);
-    const token = await loginApi(req);
-    // console.log('token: ',token);
+    try {
+        const {email, password} = req.body;
+        const user = await User.findByCredentials(email, password);
 
-    user.tokens = user.tokens.concat({token});
-    res.cookie('token',token,{
-        httpOnly:true
-    });
+        if(!user){
+            throw new Error();
+        }
+ 
+        const token = await loginApi(req);
+   
+        if(!token){
+            throw new Error()
+        }
+    
+        user.tokens = user.tokens.concat({token});
 
-    const result = await user.save();
-    // console.log('result: ',result);
-    res.redirect('/users');
+        res.cookie('token',token,{
+            httpOnly:true
+        });
+    
+        const result = await user.save();
+
+        if(!result){
+            throw new Error()
+        }
+        // console.log('result: ',result);
+        res.redirect('/users');
+
+    } catch (error) {
+        console.log(error);
+
+        req.flash('error_msg',`${error.message}`);
+        res.redirect('/login');
+
+    }
+   
 }
 
 exports.logOut = async(req, res, next)=>{

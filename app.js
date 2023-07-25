@@ -10,8 +10,7 @@ const {localDb,prodDb} = require('./db/users');
 const path = require('path');
 
 const app = express();
-
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, './views'));
 app.set('view engine','ejs');
 
 app.use(urlencoded({extended:true}))
@@ -25,7 +24,7 @@ const signupRouter = require('./routes/signup');
 const userRoute = require('./routes/users');
 const oldRoute = require('./routes/oldDevices');
 const deviceAge= require('./routes/deviceAge');
-const currentdevice = require('./routes/currentDevices');
+const currentDevicesRouter = require('./routes/currentDevices');
 
 prodDb();
 
@@ -46,14 +45,15 @@ app.use((req, res,next)=>{
     next();
 });
 
-app.use('/',homeRouter);
+app.use(homeRouter);
+app.use(currentDevicesRouter);
 app.use(changePasswordRouter)
 app.use(forgetPasswordRouter);
 app.use(signupRouter);
 app.use(userRoute);
 app.use(deviceAge);
 app.use(oldRoute);
-app.use(currentdevice);
+
 
 
 
