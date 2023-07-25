@@ -11,7 +11,7 @@
                         <th>Model Number</th>
                         <th>Ship Date</th>
                         <th>Age</th>
-                        <th>Serial Number</th>
+                        <th>Last Logged in</th>
                         <th>Operations</th>
                     </tr>
                 </thead>
@@ -22,7 +22,7 @@
                         <th>Model Number</th>
                         <th>Ship Date</th>
                         <th>Age</th>
-                        <th>Serial Number</th>
+                        <th>Last Logged in</th>
                         
                         <th>Operations</th>
                     </tr>
@@ -37,7 +37,7 @@
                         <td><%= device.ModelNumber%></td>
                         <td><%= device.ShipDate%></td>
                         <td><%= device.Age %></td>
-                        <td><%= device.SerialNumber%></td>
+                        <td><%= device.GetLastDeviceLogin%></td>
                         
                         <td>
                             <a href="edit/current/<%=device._id%>" class="btn btn-primary">Edit</a>
