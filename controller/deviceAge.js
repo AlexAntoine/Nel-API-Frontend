@@ -1,4 +1,6 @@
 const {getDeviceAgeData,addNewDevice, deleteDeviceAgeData, getSingleDeviceage} = require('../utils/deviceAgeCalls');
+const converter = require('json-2-csv');
+const fs = require('fs');
 
 exports.getDeviceAgePage = async(req, res)=>{
     
@@ -132,3 +134,22 @@ exports.deleteDevice = async(req, res)=>{
         res.redirect('/deviceage');
     }
 }
+
+exports.download = async(req, res)=>{
+    const {token} = req.cookies;
+
+    const result = await getDeviceAgeData(token);
+   ;
+    const options = {
+        keys:[
+            "DeviceName",
+            "ShipDate"
+        ]
+    }
+
+    const csv = await converter.json2csv(result, options);
+   
+    res.attachment('test.csv');
+    res.status(200).send(csv);
+}
+
