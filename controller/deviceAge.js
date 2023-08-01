@@ -135,7 +135,7 @@ exports.deleteDevice = async(req, res)=>{
     }
 }
 
-exports.download = async(req, res)=>{
+exports.downloadDeviceAge = async(req, res)=>{
     const {token} = req.cookies;
 
     const result = await getDeviceAgeData(token);
@@ -149,7 +149,7 @@ exports.download = async(req, res)=>{
 
     const csv = await converter.json2csv(result, options);
    
-    res.attachment('test.csv');
+    res.attachment('deviceAge.csv');
     res.status(200).send(csv);
 }
 
