@@ -23,6 +23,7 @@
         </button>
 
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+           
 
             <div class="mr-5">
                 <ul class="navbar-nav mr-auto mr-0">
@@ -33,6 +34,21 @@
                         </li>
                     <%}%>
 
+                    <div class="dropdown">
+                        <button class="btn btn-danger btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         Users
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="/current">Current Devices</a>
+                          <a class="dropdown-item" href="/deviceage">Device Age</a>
+                          <a class="dropdown-item" href="/old">Old Devices</a>
+                          <a class="dropdown-item" href="/users/download">Download</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item text-black" href="/logout">Logout</a>
+                          
+                        </div>
+                    </div>
+
                     <li class="nav-item">
                         <a class="nav-link text-white" href="/add/users">Add New User</b></a>
                     </li>
@@ -40,15 +56,11 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" href="/password/change">Change Password</b></a>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link text-white" href="/">Search</a>
-                    </li> -->
-
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="/logout">Logout</a>
-                    </li>
+                    
                 </ul>
             </div>
+
+            
 
         </div>
     </nav>

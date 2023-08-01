@@ -32,6 +32,22 @@
                             <a class="nav-link text-white" href="/"><%= currentUser.name%></a>
                         </li>
                     <%}%>
+
+                    <div class="dropdown">
+                        <button class="btn btn-danger btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         Old Devices
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="/current">Current Devices</a>
+                          <a class="dropdown-item" href="/deviceage">Device Age</a>
+                          <a class="dropdown-item" href="/users">Users Devices</a>
+                          <a class="dropdown-item" href="/old/download">Download</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item text-black" href="/logout">Logout</a>
+                          
+                        </div>
+                    </div>
+
                     <li class="nav-item">
                         <a class="nav-link text-white" href="/add/old">Add Old Device</b></a>
                     </li>
@@ -40,9 +56,6 @@
                         <a class="nav-link text-white" href="/password/change">Change Password</b></a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="/logout">Logout</a>
-                    </li>
                 </ul>
             </div>
 
