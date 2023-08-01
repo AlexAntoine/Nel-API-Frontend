@@ -1,4 +1,4 @@
-const axios = require('axios');
+const converter = require('json-2-csv');
 const {getCurrentDevices, addNewDevice, updateCurrentDevice, getSingleCurrentDevice, deleteDevice} = require('../utils/currentDeviceCalls');
 
 // Get
@@ -145,5 +145,44 @@ exports.deleteCurrentDevice = async(req, res)=>{
 
         res.redirect('/current');
     }
+}
+
+//Download
+exports.downloadCurrentDevices = async(req, res)=>{
+
+    const {token} = req.cookies;
+
+    const result = await getCurrentDevices(token);
+
+    const options = {
+        keys:[
+            "ComputerName",
+            "Manufacturer",
+            "SerialNumber",
+            "ModelNumber",
+            "OsVersion",
+            "ShipDate",
+            "Age",
+            "Type",
+            "shouldRetire",
+            "oldEnough",
+            "ChassisType",
+            "ChassisSubType",
+            "LastLogin",
+            "GetLastDeviceLogin",
+            "notes",
+            "ChassisTypesRaw",
+            "CurrentYear",
+            "CompId",
+            "ReplacementCost",
+            "assignedTo",
+        ],
+        emptyFieldValue:""
+    }
+
+    const csv = await converter.json2csv(result, options);
+
+    res.attachment('currentDevices.csv');
+    res.status(200).send(csv);
 }
 

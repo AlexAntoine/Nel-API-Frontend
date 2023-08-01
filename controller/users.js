@@ -1,4 +1,4 @@
-const axios = require('axios');
+const converter = require('json-2-csv')
 const {loginApi, updateAUser, removeUser, addUser, getUsersData, getSingleUsersData} = require('../utils/userCalls');
 
 exports.getNewUserPage = async(req, res)=>{
@@ -127,6 +127,32 @@ exports.deleteUser = async(req, res)=>{
     }
   
 }
+
+//Download
+exports.downloadUsersData = async(req, res)=>{
+    const {token} = req.cookies;
+
+    const result = await getUsersData(token);
+    
+    const options = {
+        keys:[
+            "CN",
+            "DisplayName",
+            "SamAccountName",
+            "UserPrincipalName",
+            "Office",
+            "Tittle",
+            "Folder",
+        ],
+        emptyFieldValue:""
+    }
+    
+    const csv = await converter.json2csv(result, options);
+    // console.log(csv);
+    res.attachment('nelUsers.csv');
+    res.status(200).send(csv);
+}
+
 
 
 

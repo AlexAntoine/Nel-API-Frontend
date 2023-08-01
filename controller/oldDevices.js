@@ -1,4 +1,5 @@
 const {addOldDevice, updateOldDeviceData, getOldDeviceData, getSingleOldDevice, deleteOldDeviceData} = require('../utils/oldDeviceCalls');
+const converter = require('json-2-csv');
 
 exports.getOldDevicesPage = async(req, res)=>{
     
@@ -139,4 +140,43 @@ exports.deleteDevice = async(req, res)=>{
 
         res.redirect('/deviceage');
     }
+}
+
+//Download
+exports.downloadOldDevices = async(req, res)=>{
+
+    const {token} = req.cookies;
+
+    const result = await getOldDeviceData(token);
+    
+    const options = {
+        keys:[
+            "ComputerName",
+            "Manufacturer",
+            "SerialNumber",
+            "ModelNumber",
+            "OsVersion",
+            "ShipDate",
+            "Age",
+            "Type",
+            "shouldRetire",
+            "oldEnough",
+            "ChassisType",
+            "ChassisSubType",
+            "LastLogin",
+            "GetLastDeviceLogin",
+            "notes",
+            "ChassisTypesRaw",
+            "CurrentYear",
+            "CompId",
+            "ReplacementCost",
+            "assignedTo",
+        ],
+        emptyFieldValue:""
+    }
+
+    const csv = await converter.json2csv(result, options);
+
+    res.attachment('oldDevices.csv');
+    res.status(200).send(csv);
 }
