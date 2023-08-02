@@ -2,6 +2,7 @@
 	margin-top: 1.2rem;
 }
 
-/* h1{
-	background-color: red;
-} */
+.dropdown-item:hover,.nav-link:hover{
+	background-color:#c82333;
+}
+
