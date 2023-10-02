@@ -33,7 +33,6 @@ exports.userLogin = async(req, res, next)=>{
         if(!result){
             throw new Error()
         }
-        // console.log('result: ',result);
         res.redirect('/users');
 
     } catch (error) {
