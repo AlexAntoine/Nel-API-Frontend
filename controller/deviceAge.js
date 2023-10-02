@@ -1,6 +1,5 @@
 const {getDeviceAgeData,addNewDevice, deleteDeviceAgeData, getSingleDeviceage} = require('../utils/deviceAgeCalls');
 const converter = require('json-2-csv');
-const fs = require('fs');
 
 exports.getDeviceAgePage = async(req, res)=>{
     
