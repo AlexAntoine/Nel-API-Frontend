@@ -7,8 +7,7 @@ exports.getCurrentDevicePage = async(req, res)=>{
         const {token} = req.cookies;
        
         const data = await getCurrentDevices(token);
-        console.log(data);
-
+    
         if(!data){
             throw new Error('No data to display')
         }
