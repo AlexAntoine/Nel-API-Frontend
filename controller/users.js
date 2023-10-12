@@ -25,7 +25,6 @@ exports.getUserEditPage = async(req, res)=>{
 }
 
 exports.getUsersPage = async(req, res)=>{
-
     if(!req.cookies.token){
         
         try{

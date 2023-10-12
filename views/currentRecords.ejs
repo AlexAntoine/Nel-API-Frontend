@@ -1,0 +1,54 @@
+<%- include('partials/currentRecords') -%>
+
+    <div class="container mt-5">
+        <%- include('partials/messages') -%>
+        <div id="table1">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                <thead>
+                    <tr>
+                        <th>User Name</th>
+                        <th>Device Name</th>
+                        <th>Login Count</th>
+                        <th>Date</th>
+                        <th>Operations</th>
+                    </tr>
+                </thead>
+
+                <tfoot>
+                    <tr>
+                        <th>User Name</th>
+                        <th>Device Name</th>
+                        <th>Login Count</th>
+                        <th>Date</th>
+                        <th>Operations</th>
+                    </tr>
+                </tfoot>
+
+                <tbody>
+                    <% records.forEach((record)=>{ %>
+
+                    
+                    <tr>
+                        <td><%= record.UserName%></td>
+                        <td><%= record.DeviceName%></td>
+                        <td><%= record.LoginCount%></td>
+                        <td><%= record.Date %></td>
+                       
+                        <td>
+                            <a href="edit/current/<%=record._id%>" class="btn btn-primary">Edit</a>
+                            <form style="display: inline;" action="/current/delete/<%=record._id%>" method="POST">
+                                <!-- <input type="hidden" name="_method" value="DELETE"> -->
+                                <button style="cursor:pointer" type="submit" class="btn btn-danger ml-2">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <%})%>
+                    
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+<%- include('partials/footer') -%>

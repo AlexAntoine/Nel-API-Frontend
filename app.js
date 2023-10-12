@@ -25,6 +25,7 @@ const userRoute = require('./routes/users');
 const oldRoute = require('./routes/oldDevices');
 const deviceAge= require('./routes/deviceAge');
 const currentDevicesRouter = require('./routes/currentDevices');
+const currentRecords = require('./routes/currentRecords');
 
 prodDb();
 
@@ -53,7 +54,7 @@ app.use(signupRouter);
 app.use(userRoute);
 app.use(deviceAge);
 app.use(oldRoute);
-
+app.use(currentRecords);
 
 
 

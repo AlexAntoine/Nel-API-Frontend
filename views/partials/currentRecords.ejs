@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -16,7 +17,7 @@
 
 <body>
     <nav class="py-1 navbar navbar-expand-lg navbar-light bg-danger">
-        <a class="navbar-brand text-white ml-4" href="/"><b>NEL Device Management</b></a>
+        <a class="navbar-brand text-white ml-4" href="/deviceage"><b>NEL Device Management</b></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -35,28 +36,31 @@
 
                     <div class="dropdown">
                         <button class="btn btn-danger btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                         Old Devices
+                         Current Records
                         </button>
                         <div class="dropdown-menu bg-danger" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item text-white" href="/deviceage">Device Age</a>
                           <a class="dropdown-item text-white" href="/current">Current Devices</a>
-                          <a class="dropdown-item text-white" href="/deviceage">Device Age</a>
-                          <a class="dropdown-item text-white" href="/records">Current Records</a>
                           <a class="dropdown-item text-white" href="/users">NEL Users</a>
-                          <a class="dropdown-item text-white" href="/old/download">Download</a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item text-white" href="/logout">Logout</a>
+                          <a class="dropdown-item text-white" href="/old">Old Devices</a>
+                          <a class="dropdown-item text-white" href="/records/download">Download</a>
+                          <!-- <div class="dropdown-divider"></div>
+                          <a class="dropdown-item text-white" href="/logout">Logout</a> -->
                           
                         </div>
                     </div>
 
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="/add/old">Add Old Device</b></a>
+                        <a class="nav-link text-white" href="/add/records">Add New Record</b></a>
                     </li>
+
+                    <!-- <li class="nav-item">
+                        <a class="nav-link text-white" href="/password/change">Change Password</b></a>
+                    </li> -->
 
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="/password/change">Change Password</b></a>
+                        <a class="nav-link text-white" href="/logout">Logout</b></a>
                     </li>
-
                 </ul>
             </div>
 
