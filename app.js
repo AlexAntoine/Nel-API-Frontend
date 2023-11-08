@@ -27,7 +27,8 @@ const deviceAge= require('./routes/deviceAge');
 const currentDevicesRouter = require('./routes/currentDevices');
 const currentRecords = require('./routes/currentRecords');
 
-prodDb();
+localDb();
+// prodDb();
 
 app.use(cookieParser());
 app.use(cookieSession({
