@@ -36,9 +36,9 @@
                         <td><%= record.Date %></td>
                        
                         <td>
-                            <a href="edit/current/<%=record._id%>" class="btn btn-primary">Edit</a>
-                            <form style="display: inline;" action="/current/delete/<%=record._id%>" method="POST">
-                                <!-- <input type="hidden" name="_method" value="DELETE"> -->
+                            <!-- <a href="edit/records/<%=record._id%>" class="btn btn-primary">Edit</a> -->
+                            <form style="display: inline;" action="/records/delete/<%=record._id%>" method="POST">
+                                <input type="hidden" name="_method" value="DELETE">
                                 <button style="cursor:pointer" type="submit" class="btn btn-danger ml-2">Delete</button>
                             </form>
                         </td>

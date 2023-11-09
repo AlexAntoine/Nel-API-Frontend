@@ -11,7 +11,7 @@ exports.getCurrentDevicePage = async(req, res)=>{
         if(!data){
             throw new Error('No data to display')
         }
-    
+        // console.log(data);
         res.render('current',{devices:data});
 
     }catch(error){

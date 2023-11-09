@@ -31,3 +31,5 @@ or the use. User information is not saved with every request hence why I need to
 Look at task manager project for more ideas. 
 
 Go back to Andrews course section 12 video 111 for logging out function.
+
+local password is 12
